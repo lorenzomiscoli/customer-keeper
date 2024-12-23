@@ -10,8 +10,9 @@ html {
         tertiary: my-theme.$tertiary-palette,
       ),
       typography: Montserrat,
-      density: -5,
+      density: 0,
     ));
+    @include mat.form-field-density(-5);
 }
 
 html,

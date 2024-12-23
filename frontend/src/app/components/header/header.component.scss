@@ -1,11 +1,16 @@
+@use '@angular/material' as mat;
+
 .header {
-  border-bottom: 1px solid #E5E7EB;
+  background-color: rgba(39, 45, 53, 1.0);
+  @include mat.icon-button-overrides((icon-color: #fff,
+      hover-state-layer-opacity:0.30));
 }
 
 nav {
-  padding-top: .938rem;
-  padding-bottom: .938rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
+  color: #fff;
 }
 
 .container {
