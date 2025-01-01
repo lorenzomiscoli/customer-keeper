@@ -1,11 +1,10 @@
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { AsyncPipe } from '@angular/common';
+
+import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 export const HOME_DEPS = [
-  MatInputModule,
-  MatIconModule,
-  MatSelectModule,
-  MatFormFieldModule
+  AsyncPipe,
+  CustomerDetailsComponent,
+  SearchFilterComponent
 ]

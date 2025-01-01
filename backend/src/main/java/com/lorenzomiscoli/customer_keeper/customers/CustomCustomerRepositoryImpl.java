@@ -24,7 +24,7 @@ class CustomCustomerRepositoryImpl implements CustomCustomerRepository {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<CustomerDTO> cq = cb.createQuery(CustomerDTO.class);
 		Root<Customer> root = applyFilters(cq, cb, customerSearchDto);
-		cq.select(cb.construct(CustomerDTO.class, root.get("name")));
+		cq.select(cb.construct(CustomerDTO.class, root.get("id"), root.get("name")));
 		TypedQuery<CustomerDTO> query = em.createQuery(cq);
 		return query.getResultList();
 	}

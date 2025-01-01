@@ -10,7 +10,7 @@ import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 class CustomerController {
 
 	private final CustomerService customerService;
