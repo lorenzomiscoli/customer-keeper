@@ -6,5 +6,5 @@ import { SearchFilterComponent } from './components/search-filter/search-filter.
 export const HOME_DEPS = [
   AsyncPipe,
   CustomerDetailsComponent,
-  SearchFilterComponent
-]
+  SearchFilterComponent,
+];

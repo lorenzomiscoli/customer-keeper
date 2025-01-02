@@ -7,5 +7,5 @@ export const SEARCH_FILTER_DEPS = [
   MatInputModule,
   MatIconModule,
   MatSelectModule,
-  MatFormFieldModule
-]
+  MatFormFieldModule,
+];
