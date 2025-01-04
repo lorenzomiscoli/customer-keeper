@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit, output } from '@angular/core';
 
+import { MatSelectChange } from '@angular/material/select';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 
+import { CustomerSearch } from '../../../../interfaces/customer.interface';
 import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
 
 @Component({
@@ -11,8 +13,9 @@ import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
   imports: [SEARCH_FILTER_DEPS],
 })
 export class SearchFilterComponent implements OnInit, OnDestroy {
-  public searchedValue = output<string>();
-  private searchChanged = new Subject<string>();
+  public searchValue = '';
+  public searchedValue = output<CustomerSearch>();
+  private searchChanged = new Subject<CustomerSearch>();
   private destroy$ = new Subject<boolean>();
 
   ngOnInit(): void {
@@ -28,7 +31,15 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public search(value: string): void {
-    this.searchChanged.next(value);
+  public search(searchValue: string, selectValue: string): void {
+    let customerSearch: CustomerSearch = {
+      [selectValue]: searchValue,
+    };
+    this.searchChanged.next(customerSearch);
+  }
+
+  public onSelection(change: MatSelectChange): void {
+    this.searchValue = '';
+    this.search('', change.value);
   }
 }

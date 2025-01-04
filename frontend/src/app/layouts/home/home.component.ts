@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Customer } from '../../interfaces/customer.interface';
+import { Customer, CustomerSearch } from '../../interfaces/customer.interface';
 import { CustomerService } from '../../services/customer.service';
 import { HOME_DEPS } from './home.dependencies';
 
@@ -20,7 +20,7 @@ export default class HomeComponent implements OnInit {
     this.customers$ = this.customerService.findAll();
   }
 
-  public onSearchedValue(value: string): void {
-    // TO DO
+  public onSearchedValue(search: CustomerSearch): void {
+    this.customers$ = this.customerService.findAll(search);
   }
 }

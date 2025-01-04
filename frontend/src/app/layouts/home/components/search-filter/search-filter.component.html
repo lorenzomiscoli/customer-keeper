@@ -1,21 +1,22 @@
-<form class="filter-form">
+<div class="filter-form">
   <mat-form-field class="long-mat-form-field">
     <mat-label>Search</mat-label>
     <input
       type="text"
       matInput
-      (keyup)="search(searchInput.value)"
+      (keyup)="search(searchInput.value, select.value)"
+      [(ngModel)]="searchValue"
       #searchInput
     />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
   <mat-form-field class="small-mat-form-field">
-    <mat-select value="name">
+    <mat-select value="name" #select (selectionChange)="onSelection($event)">
       <mat-optgroup label="Filter by">
         <mat-option value="name">Name</mat-option>
-        <mat-option value="creation date">Creation date</mat-option>
-        <mat-option value="updated date">Updated date</mat-option>
+        <mat-option value="creationDate">Creation date</mat-option>
+        <mat-option value="updatedDate">Updated date</mat-option>
       </mat-optgroup>
     </mat-select>
   </mat-form-field>
-</form>
+</div>
