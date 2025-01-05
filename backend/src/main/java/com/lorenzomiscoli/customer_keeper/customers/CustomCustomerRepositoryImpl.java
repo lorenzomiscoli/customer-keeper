@@ -35,7 +35,9 @@ class CustomCustomerRepositoryImpl implements CustomCustomerRepository {
 		Predicate[] predicatesArray = null;
 
 		if (customerSearchDto.name().isPresent()) {
-			predicatesList.add(cb.equal(root.get("name"), customerSearchDto.name().get()));
+			predicatesList.add(cb.like(cb.lower(root.get("name")),
+					cb.lower(cb.literal("%" + customerSearchDto.name().get() + "%")))
+			);
 		}
 		if (!predicatesList.isEmpty()) {
 			predicatesArray = new Predicate[predicatesList.size()];
