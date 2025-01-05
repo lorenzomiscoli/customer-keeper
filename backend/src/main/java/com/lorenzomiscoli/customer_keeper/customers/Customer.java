@@ -16,6 +16,8 @@ class Customer {
 
 	private String name;
 
+	private byte[] logo;
+
 	Integer getId() {
 		return id;
 	}
@@ -30,6 +32,14 @@ class Customer {
 
 	void setName(String name) {
 		this.name = name;
+	}
+
+	public byte[] getLogo() {
+		return logo;
+	}
+
+	public void setLogo(byte[] logo) {
+		this.logo = logo;
 	}
 
 }

@@ -1,12 +1,7 @@
 <mat-card appearance="outlined">
   <mat-card-header>
     <div class="header-container">
-      <img
-        class="avatar"
-        src="https://material.angular.io/assets/img/examples/shiba1.jpg"
-        width="40"
-        height="40"
-      />
+      <img class="avatar" [src]="customer().logoLink" width="50" height="50" />
       <mat-card-title>{{ customer().name }}</mat-card-title>
     </div>
   </mat-card-header>
