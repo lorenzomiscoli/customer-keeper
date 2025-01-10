@@ -1,13 +1,22 @@
+@use "../../../../../app/styles/_media-queries.scss" as media;
+
 .filter-form {
   display: flex;
-  justify-content: flex-end;
-  column-gap: 10px;
+  flex-direction: column;
 }
 
-.long-mat-form-field {
-  min-width: 300px;
-}
+@include media.respond-above(md) {
+  .filter-form {
+    flex-direction: row;
+    justify-content: flex-end;
+    column-gap: 10px;
+  }
 
-.small-mat-form-field {
-  width: 200px;
+  .long-mat-form-field {
+    width: 300px;
+  }
+
+  .small-mat-form-field {
+    width: 200px;
+  }
 }
