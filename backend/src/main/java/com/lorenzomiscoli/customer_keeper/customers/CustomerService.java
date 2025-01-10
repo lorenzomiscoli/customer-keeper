@@ -29,14 +29,17 @@ class CustomerService {
 
 	CustomerLogoDTO findLogo(Integer id) {
 		Customer customer = customerRepo.findById(id).get();
-		InputStream is = new BufferedInputStream(new ByteArrayInputStream(customer.getLogo()));
+		byte[] logo = customer.getLogo();
 		String mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
-		try {
-			mimeType = URLConnection.guessContentTypeFromStream(is);
-		} catch (IOException e) {
-			// TODO add logs
+		if (logo != null) {
+			try {
+				InputStream is = new BufferedInputStream(new ByteArrayInputStream(logo));
+				mimeType = URLConnection.guessContentTypeFromStream(is);
+			} catch (IOException e) {
+				// TODO add logs
+			}
 		}
-		return new CustomerLogoDTO(customer.getLogo(), mimeType);
+		return new CustomerLogoDTO(logo, mimeType);
 	}
 
 }

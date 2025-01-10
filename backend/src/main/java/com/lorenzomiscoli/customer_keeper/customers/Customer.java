@@ -1,5 +1,8 @@
 package com.lorenzomiscoli.customer_keeper.customers;
 
+import java.time.ZonedDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +20,12 @@ class Customer {
 	private String name;
 
 	private byte[] logo;
+
+	@Column(name = "created_date")
+	private ZonedDateTime createdDate;
+
+	@Column(name = "updated_date")
+	private ZonedDateTime updatedDate;
 
 	Integer getId() {
 		return id;
@@ -40,6 +49,22 @@ class Customer {
 
 	public void setLogo(byte[] logo) {
 		this.logo = logo;
+	}
+
+	public ZonedDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(ZonedDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public ZonedDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(ZonedDateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 }

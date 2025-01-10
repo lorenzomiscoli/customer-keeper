@@ -3,6 +3,11 @@ import { Component, OnDestroy, OnInit, output } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 
+import { environment } from '../../../../../enviroments/enviroment';
+import {
+  CustomerSort,
+  CustomerSortLabelMapping,
+} from '../../../../constants/customer-sort';
 import { CustomerSearch } from '../../../../interfaces/customer.interface';
 import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
 
@@ -14,8 +19,11 @@ import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
 })
 export class SearchFilterComponent implements OnInit, OnDestroy {
   public searchValue = '';
+  public defaultSelectValue = environment.defaultCustomerSort;
   public searchedValue = output<CustomerSearch>();
   private searchChanged = new Subject<CustomerSearch>();
+  public customerSortLabelMapping = CustomerSortLabelMapping;
+  public customerSortTypes = Object.values(CustomerSort);
   private destroy$ = new Subject<boolean>();
 
   ngOnInit(): void {
@@ -31,9 +39,10 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public search(searchValue: string, selectValue: string): void {
+  public search(searchValue: string, selectValue: CustomerSort): void {
     let customerSearch: CustomerSearch = {
-      [selectValue]: searchValue,
+      name: searchValue,
+      sort: selectValue,
     };
     this.searchChanged.next(customerSearch);
   }

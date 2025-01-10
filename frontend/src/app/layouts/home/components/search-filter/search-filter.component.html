@@ -1,6 +1,6 @@
 <div class="filter-form">
   <mat-form-field class="long-mat-form-field">
-    <mat-label>Search</mat-label>
+    <mat-label>Search by name</mat-label>
     <input
       type="text"
       matInput
@@ -11,11 +11,17 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
   <mat-form-field class="small-mat-form-field">
-    <mat-select value="name" #select (selectionChange)="onSelection($event)">
-      <mat-optgroup label="Filter by">
-        <mat-option value="name">Name</mat-option>
-        <mat-option value="creationDate">Creation date</mat-option>
-        <mat-option value="updatedDate">Updated date</mat-option>
+    <mat-select
+      [value]="defaultSelectValue"
+      #select
+      (selectionChange)="onSelection($event)"
+    >
+      <mat-optgroup label="Sort by">
+        @for(customerSortType of customerSortTypes; track customerSortType){
+        <mat-option [value]="customerSortType">{{
+          customerSortLabelMapping[customerSortType]
+        }}</mat-option>
+        }
       </mat-optgroup>
     </mat-select>
   </mat-form-field>

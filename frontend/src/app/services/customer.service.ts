@@ -14,15 +14,14 @@ export class CustomerService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public findAll(searchParams?: CustomerSearch): Observable<Customer[]> {
+  public findAll(customerSearch?: CustomerSearch): Observable<Customer[]> {
     let headers: HttpParams | {} = {};
-    if (searchParams) {
-      const propertyName = Object.keys(searchParams)[0];
-      const propertyValue = searchParams[propertyName];
-      if (propertyValue.trim())
-        headers = {
-          params: new HttpParams().set(propertyName, propertyValue),
-        };
+    if (customerSearch) {
+      headers = {
+        params: new HttpParams()
+          .set('name', customerSearch.name)
+          .set('sort', customerSearch.sort),
+      };
     }
     return this.httpClient.get<Customer[]>(this.customerBaseUrl, headers).pipe(
       map((customers) => {

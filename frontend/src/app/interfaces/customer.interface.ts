@@ -1,8 +1,12 @@
+import { CustomerSort } from '../constants/customer-sort';
+
 export interface Customer {
   id: number;
   name: string;
   logoLink?: string;
 }
+
 export interface CustomerSearch {
-  [key: string]: string;
+  name: string;
+  sort: CustomerSort;
 }
