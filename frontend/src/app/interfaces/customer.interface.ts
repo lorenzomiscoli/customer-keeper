@@ -4,6 +4,7 @@ export interface Customer {
   id: number;
   name: string;
   logoLink?: string;
+  updatedDate: string;
 }
 
 export interface CustomerSearch {

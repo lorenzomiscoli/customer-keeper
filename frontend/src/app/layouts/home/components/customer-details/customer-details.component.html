@@ -1,8 +1,11 @@
 <mat-card appearance="outlined">
   <mat-card-header>
     <div class="header-container">
-      <img class="avatar" [src]="customer().logoLink" width="50" height="50" />
+      <img class="avatar" [src]="customer().logoLink" width="48" height="48" />
       <mat-card-title>{{ customer().name }}</mat-card-title>
     </div>
   </mat-card-header>
+  <mat-card-content>
+    <p>{{ customer().updatedDate | appCustomerDateFormat }}</p>
+  </mat-card-content>
 </mat-card>
