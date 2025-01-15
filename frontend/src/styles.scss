@@ -22,7 +22,7 @@ body {
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('assets/fonts/Montserrat-VariableFont_wght.ttf');
+  src: url('../public/assets/fonts/Montserrat-VariableFont_wght.ttf');
 }
 
 body {
@@ -34,13 +34,13 @@ body {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(assets/fonts/MaterialIcons-Regular.eot);
+  src: url(../public/assets/fonts/MaterialIcons-Regular.eot);
   /* For IE6-8 */
   src: local('Material Icons'),
     local('MaterialIcons-Regular'),
-    url(assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
-    url(assets/fonts/MaterialIcons-Regular.woff) format('woff'),
-    url(assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
+    url(../public/assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+    url(../public/assets/fonts/MaterialIcons-Regular.woff) format('woff'),
+    url(../public/assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
