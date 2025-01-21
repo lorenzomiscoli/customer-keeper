@@ -1,28 +1,33 @@
 <div class="filter-form">
-  <mat-form-field class="long-mat-form-field">
-    <mat-label>Search by name</mat-label>
-    <input
-      type="text"
-      matInput
-      (keyup)="search(searchInput.value, select.value)"
-      [(ngModel)]="searchValue"
-      #searchInput
-    />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-  <mat-form-field class="small-mat-form-field">
-    <mat-select
-      [value]="defaultSelectValue"
-      #select
-      (selectionChange)="onSelection($event)"
-    >
-      <mat-optgroup label="Sort by">
-        @for(customerSortType of customerSortTypes; track customerSortType){
-        <mat-option [value]="customerSortType">{{
-          customerSortLabelMapping[customerSortType]
-        }}</mat-option>
-        }
-      </mat-optgroup>
-    </mat-select>
-  </mat-form-field>
+  <div class="filter-container">
+    <button mat-flat-button>New customer</button>
+  </div>
+  <div class="filter-container">
+    <mat-form-field class="long-mat-form-field">
+      <mat-label>Search by name</mat-label>
+      <input
+        type="text"
+        matInput
+        (keyup)="search(searchInput.value, select.value)"
+        [(ngModel)]="searchValue"
+        #searchInput
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="small-mat-form-field">
+      <mat-select
+        [value]="defaultSelectValue"
+        #select
+        (selectionChange)="onSelection($event)"
+      >
+        <mat-optgroup label="Sort by">
+          @for(customerSortType of customerSortTypes; track customerSortType){
+          <mat-option [value]="customerSortType">{{
+            customerSortLabelMapping[customerSortType]
+          }}</mat-option>
+          }
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>

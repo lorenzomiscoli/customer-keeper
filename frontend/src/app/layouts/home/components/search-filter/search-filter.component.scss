@@ -5,10 +5,15 @@
   flex-direction: column;
 }
 
+.filter-container {
+  display: flex;
+  column-gap: 10px;
+}
+
 @include media.respond-above(md) {
   .filter-form {
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     column-gap: 10px;
   }
 
