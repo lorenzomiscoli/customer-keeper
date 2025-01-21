@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 
@@ -9,7 +10,7 @@ import { CustomerDateFormatPipe } from '../../../../pipes/customer-date-format.p
   selector: 'app-customer-details',
   templateUrl: './customer-details.component.html',
   styleUrl: './customer-details.component.scss',
-  imports: [MatCardModule, CustomerDateFormatPipe],
+  imports: [MatCardModule, CustomerDateFormatPipe, RouterLink],
 })
 export class CustomerDetailsComponent {
   public customer = input.required<Customer>();
