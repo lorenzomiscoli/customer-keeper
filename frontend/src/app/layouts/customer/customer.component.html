@@ -1,6 +1,1 @@
-<div class="container">
-  <app-search-filter (searchedValue)="onSearchedValue($event)" />
-  @for(customer of customers$ | async; track customer.id){
-  <app-customer-card [customer]="customer" />
-  }
-</div>
+<router-outlet></router-outlet>

@@ -1,12 +1,15 @@
 import { Routes } from '@angular/router';
+import { CUSTOMER_ROUTES } from './layouts/customer/customer.routing';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./layouts/customer/customer.component'),
+    redirectTo: 'customers',
+    pathMatch: 'full',
   },
   {
-    path: 'customers/:id',
-    loadComponent: () => import('./layouts/customer/components/customer-details/customer-details.component'),
+    path: 'customers',
+    loadComponent: () => import('./layouts/customer/customer.component'),
+    children: CUSTOMER_ROUTES,
   },
 ];

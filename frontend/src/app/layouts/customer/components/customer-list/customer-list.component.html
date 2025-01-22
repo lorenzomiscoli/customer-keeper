@@ -1,0 +1,23 @@
+<div class="container">
+  <app-search-filter (searchedValue)="onSearchedValue($event)" />
+  @for(customer of customers$ | async; track customer.id){
+  <mat-card appearance="outlined" [routerLink]="['details', customer.id]">
+    <mat-card-header>
+      <div class="header-container">
+        <img
+          #logo
+          class="avatar"
+          [src]="customer.logoLink"
+          width="48"
+          height="48"
+          (error)="logo.src = 'assets/images/default-user.svg'"
+        />
+        <mat-card-title>{{ customer.name }}</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ customer.updatedDate | appCustomerDateFormat }}</p>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

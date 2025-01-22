@@ -1,0 +1,17 @@
+.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.logo-field-container {
+  margin-bottom: 20px;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    > img,
+    span {
+      cursor: pointer;
+    }
+  }
+}
