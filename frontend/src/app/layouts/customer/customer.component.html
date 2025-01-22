@@ -1,6 +1,6 @@
 <div class="container">
   <app-search-filter (searchedValue)="onSearchedValue($event)" />
   @for(customer of customers$ | async; track customer.id){
-  <app-customer-details [customer]="customer" />
+  <app-customer-card [customer]="customer" />
   }
 </div>

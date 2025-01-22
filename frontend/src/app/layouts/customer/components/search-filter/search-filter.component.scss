@@ -3,6 +3,7 @@
 .filter-form {
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
 }
 
 .filter-container {
@@ -14,7 +15,6 @@
   .filter-form {
     flex-direction: row;
     justify-content: space-between;
-    column-gap: 10px;
   }
 
   .long-mat-form-field {

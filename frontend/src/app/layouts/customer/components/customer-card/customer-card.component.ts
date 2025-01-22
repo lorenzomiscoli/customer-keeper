@@ -7,11 +7,11 @@ import { Customer } from '../../../../interfaces/customer.interface';
 import { CustomerDateFormatPipe } from '../../../../pipes/customer-date-format.pipe';
 
 @Component({
-  selector: 'app-customer-details',
-  templateUrl: './customer-details.component.html',
-  styleUrl: './customer-details.component.scss',
+  selector: 'app-customer-card',
+  templateUrl: './customer-card.component.html',
+  styleUrl: './customer-card.component.scss',
   imports: [MatCardModule, CustomerDateFormatPipe, RouterLink],
 })
-export class CustomerDetailsComponent {
+export class CustomerCardComponent {
   public customer = input.required<Customer>();
 }

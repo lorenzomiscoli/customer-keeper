@@ -73,6 +73,10 @@ body {
   font-feature-settings: "liga";
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container {
   margin-left: auto;
   margin-right: auto;

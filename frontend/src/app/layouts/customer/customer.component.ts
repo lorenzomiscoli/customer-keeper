@@ -5,14 +5,14 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../enviroments/enviroment';
 import { Customer, CustomerSearch } from '../../interfaces/customer.interface';
 import { CustomerService } from '../../services/customer.service';
-import { HOME_DEPS } from './home.dependencies';
+import { CUSTOMER_DEPS } from './customer.dependencies';
 
 @Component({
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  imports: [HOME_DEPS],
+  templateUrl: './customer.component.html',
+  styleUrl: './customer.component.scss',
+  imports: [CUSTOMER_DEPS],
 })
-export default class HomeComponent implements OnInit {
+export default class CustomerComponent implements OnInit {
   public customers$!: Observable<Customer[]>;
 
   constructor(private customerService: CustomerService) {}
