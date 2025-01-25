@@ -5,13 +5,18 @@
 
 .logo-field-container {
   margin-bottom: 20px;
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    > img,
-    span {
-      cursor: pointer;
-    }
-  }
+}
+
+mat-form-field {
+  width: 300px;
+}
+
+.spinner {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.error-message {
+  margin-top: 10px;
 }

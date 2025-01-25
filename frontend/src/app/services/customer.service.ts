@@ -1,10 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
 
 import { environment } from '../../enviroments/enviroment';
-import { Customer, CustomerSearch } from '../interfaces/customer.interface';
+import {
+  Customer,
+  CustomerInsert,
+  CustomerSearch,
+} from '../interfaces/customer.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +36,20 @@ export class CustomerService {
         return customers;
       })
     );
+  }
+
+  public insert(
+    customerInsert: CustomerInsert,
+    logo: File | null
+  ): Observable<void> {
+    const formData: FormData = new FormData();
+    formData.append(
+      'customer',
+      new Blob([JSON.stringify(customerInsert)], { type: 'application/json' })
+    );
+    if (logo) {
+      formData.append('logo', logo);
+    }
+    return this.httpClient.post<void>(this.customerBaseUrl, formData);
   }
 }

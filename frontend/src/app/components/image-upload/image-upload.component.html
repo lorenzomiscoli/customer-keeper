@@ -1,0 +1,12 @@
+<div (click)="fileUpload.click()" class="upload-container">
+  <img [src]="logo" alt="Customer Logo" width="48" height="48" class="avatar"/>
+  <span>Upload picture</span>
+  <input
+    type="text"
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    #fileUpload
+    hidden
+  />
+</div>

@@ -11,3 +11,9 @@ export interface CustomerSearch {
   name: string;
   sort: CustomerSort;
 }
+
+export interface CustomerInsert {
+  name: string;
+  email: string;
+  phone: string;
+}
