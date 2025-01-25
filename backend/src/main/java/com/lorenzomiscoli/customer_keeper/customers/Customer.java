@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,11 +22,30 @@ class Customer {
 
 	private byte[] logo;
 
+	private String email;
+
+	private String phone;
+
 	@Column(name = "created_date")
 	private ZonedDateTime createdDate;
 
 	@Column(name = "updated_date")
 	private ZonedDateTime updatedDate;
+
+	Customer() {
+	}
+
+	Customer(String name, String email, String phone) {
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+
+	@PrePersist
+	void prePersist() {
+		this.createdDate = ZonedDateTime.now();
+		this.updatedDate = ZonedDateTime.now();
+	}
 
 	Integer getId() {
 		return id;
@@ -49,6 +69,22 @@ class Customer {
 
 	public void setLogo(byte[] logo) {
 		this.logo = logo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public ZonedDateTime getCreatedDate() {
