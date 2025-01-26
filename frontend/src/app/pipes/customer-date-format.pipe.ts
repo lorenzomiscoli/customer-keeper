@@ -20,7 +20,9 @@ export class CustomerDateFormatPipe implements PipeTransform {
       return 'Updated Yesterday';
     } else {
       const weeks = getNumberOfWeeks(date);
-      if (weeks <= 4) {
+      if (weeks === 0) {
+        return 'Updated ' + days + ' days ago';
+      } else if (weeks <= 4) {
         return weeks === 1
           ? 'Updated ' + weeks + ' week ago'
           : 'Updated ' + weeks + ' weeks ago';
