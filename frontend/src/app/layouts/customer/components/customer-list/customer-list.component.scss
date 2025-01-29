@@ -22,3 +22,16 @@ mat-card {
   object-fit: cover;
   margin-right: 12px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.sticky-container {
+  position: sticky;
+  bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #fff;
+}

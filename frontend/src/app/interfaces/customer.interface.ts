@@ -10,6 +10,7 @@ export interface Customer {
 export interface CustomerSearch {
   name: string;
   sort: CustomerSort;
+  page?: number;
 }
 
 export interface CustomerInsert {

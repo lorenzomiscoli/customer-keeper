@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
 import com.lorenzomiscoli.customer_keeper.common.validators.ValidLogoSize;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerInsertDTO;
@@ -35,8 +37,8 @@ class CustomerController {
 	}
 
 	@GetMapping
-	List<CustomerDTO> search(CustomerSearchDTO customerSearchDto) {
-		return customerService.search(customerSearchDto);
+	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
+		return customerService.search(customerSearchDto, pageable);
 	}
 
 	@GetMapping("/{id}/logo")

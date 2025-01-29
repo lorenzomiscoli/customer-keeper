@@ -1,12 +1,12 @@
 package com.lorenzomiscoli.customer_keeper.customers;
 
-import java.util.List;
+import org.springframework.data.domain.Pageable;
 
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
+import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
 
 public interface CustomCustomerRepository {
 
-	List<CustomerDTO> search(CustomerSearchDTO customerSearchDto);
+	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable);
 	
 }

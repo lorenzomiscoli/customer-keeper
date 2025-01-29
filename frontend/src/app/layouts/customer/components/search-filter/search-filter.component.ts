@@ -10,6 +10,7 @@ import {
 } from '../../../../constants/customer-sort';
 import { CustomerSearch } from '../../../../interfaces/customer.interface';
 import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
+import { CustomerState } from '../../services/customer.state';
 
 @Component({
   selector: 'app-search-filter',
@@ -20,17 +21,18 @@ import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
 export class SearchFilterComponent implements OnInit, OnDestroy {
   public searchValue = '';
   public defaultSelectValue = environment.defaultCustomerSort;
-  public searchedValue = output<CustomerSearch>();
   private searchChanged = new Subject<CustomerSearch>();
   public customerSortLabelMapping = CustomerSortLabelMapping;
   public customerSortTypes = Object.values(CustomerSort);
   private destroy$ = new Subject<boolean>();
 
+  constructor(private customerState: CustomerState) {}
+
   ngOnInit(): void {
     this.searchChanged
       .pipe(takeUntil(this.destroy$), debounceTime(400))
       .subscribe((value) => {
-        this.searchedValue.emit(value);
+        this.customerState.saveSearchFilter(value);
       });
   }
 

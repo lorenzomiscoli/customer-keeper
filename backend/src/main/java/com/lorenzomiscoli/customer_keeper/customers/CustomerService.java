@@ -8,10 +8,12 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerInsertDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDTO;
@@ -26,8 +28,8 @@ class CustomerService {
 		this.customerRepo = customerRepo;
 	}
 
-	List<CustomerDTO> search(CustomerSearchDTO customerSearchDto) {
-		return customerRepo.search(customerSearchDto);
+	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
+		return customerRepo.search(customerSearchDto, pageable);
 	}
 
 	CustomerLogoDTO findLogo(Integer id) {

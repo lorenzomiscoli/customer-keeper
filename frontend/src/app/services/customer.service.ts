@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import {
   CustomerInsert,
   CustomerSearch,
 } from '../interfaces/customer.interface';
+import { PageResult } from '../interfaces/page-result.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,24 +19,29 @@ export class CustomerService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public findAll(customerSearch?: CustomerSearch): Observable<Customer[]> {
+  public findAll(
+    customerSearch?: CustomerSearch
+  ): Observable<PageResult<Customer>> {
     let headers: HttpParams | {} = {};
     if (customerSearch) {
       headers = {
         params: new HttpParams()
           .set('name', customerSearch.name)
-          .set('sort', customerSearch.sort),
+          .set('sort', customerSearch.sort)
+          .set('page', customerSearch.page ? customerSearch.page : 0),
       };
     }
-    return this.httpClient.get<Customer[]>(this.customerBaseUrl, headers).pipe(
-      map((customers) => {
-        customers.forEach(
-          (customer) =>
-            (customer.logoLink = `${this.customerBaseUrl}/${customer.id}/logo`)
-        );
-        return customers;
-      })
-    );
+    return this.httpClient
+      .get<PageResult<Customer>>(this.customerBaseUrl, headers)
+      .pipe(
+        map((pageResult) => {
+          pageResult.content.forEach(
+            (customer) =>
+              (customer.logoLink = `${this.customerBaseUrl}/${customer.id}/logo`)
+          );
+          return pageResult;
+        })
+      );
   }
 
   public insert(
