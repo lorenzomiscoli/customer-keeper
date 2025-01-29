@@ -101,6 +101,7 @@ body {
 
 .avatar {
   border-radius: 50%;
+  object-fit: cover;
 }
 
 @include media.respond-above(sm) {
