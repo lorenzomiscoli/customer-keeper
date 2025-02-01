@@ -31,7 +31,8 @@ class CustomCustomerRepositoryImpl implements CustomCustomerRepository {
 		List<CustomerDTO> customers = null;
 		long countResult = 0;
 		Root<Customer> root = applyFilters(cq, cb, customerSearchDto, false);
-		cq.select(cb.construct(CustomerDTO.class, root.get("id"), root.get("name"), root.get("updatedDate")));
+		cq.select(cb.construct(CustomerDTO.class, root.get("id"), root.get("name"), root.get("email"),
+				root.get("phone"), root.get("updatedDate")));
 		cqCount.select(cb.count(applyFilters(cqCount, cb, customerSearchDto, true))).distinct(true);
 		TypedQuery<CustomerDTO> query = em.createQuery(cq);
 		query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());

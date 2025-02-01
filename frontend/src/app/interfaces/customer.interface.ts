@@ -4,6 +4,8 @@ export interface Customer {
   id: number;
   name: string;
   logoLink?: string;
+  email: string;
+  phone: string;
   updatedDate: string;
 }
 

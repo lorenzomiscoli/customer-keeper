@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { CustomerDateFormatPipe } from '../../../../pipes/customer-date-format.pipe';
 import { SearchFilterComponent } from '../search-filter/search-filter.component';
@@ -14,6 +15,7 @@ export const CUSTOMER_LIST_DEPS = [
   MatButtonModule,
   MatCardModule,
   MatIconModule,
+  MatTooltipModule,
   CustomerDateFormatPipe,
   SearchFilterComponent,
 ];
