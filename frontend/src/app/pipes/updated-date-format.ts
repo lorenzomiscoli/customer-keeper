@@ -8,9 +8,9 @@ import {
 } from '../utils/date.utils';
 
 @Pipe({
-  name: 'appCustomerDateFormat',
+  name: 'appUpdatedDateFormat',
 })
-export class CustomerDateFormatPipe implements PipeTransform {
+export class UpdatedDateFormatPipe implements PipeTransform {
   transform(value: string) {
     let date = new Date(value);
     const days = getNumberOfDays(date);

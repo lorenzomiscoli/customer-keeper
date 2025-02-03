@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { combineLatest, map, Observable, switchMap } from 'rxjs';
 
-import { Customer } from '../../../../interfaces/customer.interface';
-import { CustomerService } from '../../../../services/customer.service';
+import { Customer } from '../../interfaces/customer.interface';
+import { CustomerService } from '../../services/customer.service';
 import { CustomerState } from '../../services/customer.state';
 import { CUSTOMER_LIST_DEPS } from './customer-list.dependencies';
 

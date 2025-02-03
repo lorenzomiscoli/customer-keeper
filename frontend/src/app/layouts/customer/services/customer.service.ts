@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
 
-import { environment } from '../../enviroments/enviroment';
+import { environment } from '../../../../enviroments/enviroment';
 import {
   Customer,
   CustomerInsert,
   CustomerSearch,
 } from '../interfaces/customer.interface';
-import { PageResult } from '../interfaces/page-result.interface';
+import { PageResult } from '../../../interfaces/page-result.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -7,8 +7,8 @@ import { environment } from '../../../../../enviroments/enviroment';
 import {
   CustomerSort,
   CustomerSortLabelMapping,
-} from '../../../../constants/customer-sort';
-import { CustomerSearch } from '../../../../interfaces/customer.interface';
+} from '../../constants/customer-sort';
+import { CustomerSearch } from '../../interfaces/customer.interface';
 import { SEARCH_FILTER_DEPS } from './search-filter.dependencies';
 import { CustomerState } from '../../services/customer.state';
 

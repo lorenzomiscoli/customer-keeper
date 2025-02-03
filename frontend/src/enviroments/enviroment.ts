@@ -1,4 +1,4 @@
-import { CustomerSort } from '../app/constants/customer-sort';
+import { CustomerSort } from '../app/layouts/customer/constants/customer-sort';
 
 export const environment = {
   production: false,

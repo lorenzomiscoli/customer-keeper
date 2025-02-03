@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CustomerSearch } from '../../../interfaces/customer.interface';
-import { CustomerSort } from '../../../constants/customer-sort';
+import { CustomerSearch } from '../interfaces/customer.interface';
+import { CustomerSort } from '../constants/customer-sort';
 
 @Injectable()
 export class CustomerState {
