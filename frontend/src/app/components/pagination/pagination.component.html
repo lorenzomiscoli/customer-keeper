@@ -1,0 +1,30 @@
+<div class="pagination">
+  <button
+    mat-icon-button
+    [disabled]="!(currentPage - 1 >= 0)"
+    (click)="changePage(0)"
+  >
+    <mat-icon>first_page</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    [disabled]="!(currentPage - 1 >= 0)"
+    (click)="changePage(currentPage - 1)"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    [disabled]="!(currentPage + 1 < totalPages())"
+    (click)="changePage(currentPage + 1)"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    [disabled]="!(currentPage + 1 < totalPages())"
+    (click)="changePage(totalPages() - 1)"
+  >
+    <mat-icon>last_page</mat-icon>
+  </button>
+</div>

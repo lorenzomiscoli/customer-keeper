@@ -1,21 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { UpdatedDateFormatPipe } from '../../../../pipes/updated-date-format';
+import { PaginationComponent } from '../../../../components/pagination/pagination.component';
+import { CustomerCardComponent } from '../customer-card/customer-card.component';
 import { SearchFilterComponent } from '../search-filter/search-filter.component';
 
 export const CUSTOMER_LIST_DEPS = [
   AsyncPipe,
-  RouterLink,
-  MatButtonModule,
-  MatCardModule,
-  MatIconModule,
-  MatTooltipModule,
-  UpdatedDateFormatPipe,
   SearchFilterComponent,
+  PaginationComponent,
+  CustomerCardComponent
 ];

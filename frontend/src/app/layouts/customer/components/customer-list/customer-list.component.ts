@@ -1,35 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 
-import { combineLatest, map, Observable, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  map,
+  Observable,
+  switchMap,
+} from 'rxjs';
 
-import { Customer } from '../../interfaces/customer.interface';
+import { CustomerSort } from '../../constants/customer-sort';
+import { Customer, CustomerSearch } from '../../interfaces/customer.interface';
 import { CustomerService } from '../../services/customer.service';
-import { CustomerState } from '../../services/customer.state';
 import { CUSTOMER_LIST_DEPS } from './customer-list.dependencies';
 
 @Component({
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss',
-  imports: [CUSTOMER_LIST_DEPS],
-  providers: [CustomerState],
+  imports: [CUSTOMER_LIST_DEPS]
 })
 export default class CustomerListComponent implements OnInit {
   public customers$!: Observable<Customer[]>;
-  public currentPage = 0;
+  private currentPage$ = new BehaviorSubject<number>(0);
+  private searchFilter$ = new BehaviorSubject<CustomerSearch>({
+    name: '',
+    sort: CustomerSort.NAME,
+  });
   public totalPages = 0;
 
-  constructor(
-    private customerService: CustomerService,
-    private customerState: CustomerState
-  ) {}
+  constructor(private customerService: CustomerService) {}
 
   ngOnInit(): void {
     this.customers$ = combineLatest([
-      this.customerState.currentPage$,
-      this.customerState.searchFilter$,
+      this.currentPage$,
+      this.searchFilter$,
     ]).pipe(
       switchMap(([currentPage, searchFilter]) => {
-        this.currentPage = currentPage;
         return this.customerService
           .findAll({ ...searchFilter, page: currentPage })
           .pipe(
@@ -42,7 +47,11 @@ export default class CustomerListComponent implements OnInit {
     );
   }
 
-  public changePage(page: number): void {
-    this.customerState.saveCurrentPage(page);
+  public onSearchChanged(search: CustomerSearch): void {
+    this.searchFilter$.next(search);
+  }
+
+  public onPageChanged(page: number): void {
+    this.currentPage$.next(page);
   }
 }
