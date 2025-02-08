@@ -44,6 +44,15 @@ export class CustomerService {
       );
   }
 
+  public findById(id: number): Observable<Customer> {
+    return this.httpClient.get<Customer>(`${this.customerBaseUrl}/${id}`).pipe(
+      map((customer) => {
+        customer.logoLink = `${this.customerBaseUrl}/${customer.id}/logo`;
+        return customer;
+      })
+    );
+  }
+
   public insert(
     customerInsert: CustomerInsert,
     logo: File | null

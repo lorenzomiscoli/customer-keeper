@@ -104,6 +104,26 @@ body {
   object-fit: cover;
 }
 
+.inline-spinner {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.form {
+  .logo-field-container {
+    margin-bottom: 20px;
+  }
+
+  mat-form-field {
+    width: 300px;
+  }
+
+  .error-message {
+    margin-top: 10px;
+  }
+}
+
 @include media.respond-above(sm) {
   .container {
     max-width: 540px;

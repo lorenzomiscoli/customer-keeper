@@ -8,6 +8,8 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
+
 @ControllerAdvice
 public class ExceptionController {
 
@@ -20,6 +22,11 @@ public class ExceptionController {
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public ResponseEntity<ResponseError> maxUpload(MaxUploadSizeExceededException ex) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseError("Maximum upload size exceeded"));
+	}
+
+	@ExceptionHandler(RecordNotFoundException.class)
+	public ResponseEntity<ResponseError> recordNotFound(RecordNotFoundException ex) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseError(ex.getMessage()));
 	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)

@@ -2,7 +2,6 @@ package com.lorenzomiscoli.customer_keeper.customers;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
@@ -39,6 +38,11 @@ class CustomerController {
 	@GetMapping
 	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
 		return customerService.search(customerSearchDto, pageable);
+	}
+
+	@GetMapping("/{id}")
+	CustomerDTO findById(@PathVariable int id) {
+		return customerService.findById(id);
 	}
 
 	@GetMapping("/{id}/logo")

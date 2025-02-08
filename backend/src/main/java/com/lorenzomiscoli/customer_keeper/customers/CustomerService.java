@@ -5,7 +5,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
@@ -13,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
 import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerInsertDTO;
@@ -30,6 +30,11 @@ class CustomerService {
 
 	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
 		return customerRepo.search(customerSearchDto, pageable);
+	}
+
+	CustomerDTO findById(Integer id) {
+		return customerRepo.findDTOById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Customer with id: " + id + " could not be found"));
 	}
 
 	CustomerLogoDTO findLogo(Integer id) {

@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="form">
     <div class="logo-field-container">
       <app-image-upload
         (imageChanged)="onImageChanged($event)"
@@ -41,7 +41,7 @@
         <mat-progress-spinner
           [mode]="'indeterminate'"
           [diameter]="16"
-          class="spinner"
+          class="inline-spinner"
         ></mat-progress-spinner>
         }
       </button>
