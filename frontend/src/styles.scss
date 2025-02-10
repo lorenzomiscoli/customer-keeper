@@ -82,6 +82,11 @@ body {
   box-sizing: border-box;
 }
 
+.success-message {
+  color: #1fa32e;
+  margin-top: 10px;
+}
+
 .snackbar-success {
   --mdc-snackbar-container-color: #fff;
   --mdc-snackbar-supporting-text-color: #1fa32e;

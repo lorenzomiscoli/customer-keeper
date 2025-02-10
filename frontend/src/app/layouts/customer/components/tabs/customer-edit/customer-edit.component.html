@@ -36,7 +36,7 @@
     </mat-form-field>
   </div>
   <div>
-    <button mat-flat-button>
+    <button mat-flat-button [disabled]="isSaveDisabled">
       Save customer @if(isLoading){
       <mat-progress-spinner
         [mode]="'indeterminate'"
@@ -47,6 +47,8 @@
     </button>
     @if(errorMessage){
     <mat-error class="error-message">{{ errorMessage }}</mat-error>
+    } @if(successMessage){
+    <div class="success-message">{{ successMessage }}</div>
     }
   </div>
 </form>

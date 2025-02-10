@@ -17,13 +17,13 @@ export interface CustomerSearch {
   page?: number;
 }
 
-export interface CustomerInsert {
+export interface CustomerSave {
   name: string;
   email: string;
   phone: string;
 }
 
-export interface CustomerAddForm {
+export interface CustomerSaveForm {
   name: FormControl<string>;
   email: FormControl<string | null>;
   phone: FormControl<string | null>;

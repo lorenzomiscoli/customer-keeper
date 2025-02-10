@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
 import com.lorenzomiscoli.customer_keeper.common.validators.ValidLogoSize;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerInsertDTO;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSaveDto;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
 
@@ -54,11 +55,19 @@ class CustomerController {
 	}
 
 	@PostMapping
-	ResponseEntity<Void> insert(@RequestPart("customer") @Valid CustomerInsertDTO customerInsertDto,
+	ResponseEntity<Void> insert(
+			@RequestPart("customer") @Valid CustomerSaveDto customerSaveDto,
 			@RequestPart("logo") @ValidLogoSize Optional<MultipartFile> logo) throws IOException {
-		int id = customerService.insert(customerInsertDto, logo);
+		int id = customerService.insert(customerSaveDto, logo);
 		URI loc = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 		return ResponseEntity.created(loc).build();
+	}
+
+	@PutMapping("/{id}")
+	ResponseEntity<Void> update(@PathVariable int id, @RequestPart("customer") @Valid CustomerSaveDto customerSaveDto,
+			@RequestPart("logo") @ValidLogoSize Optional<MultipartFile> logo) throws IOException {
+		customerService.update(id, customerSaveDto, logo);
+		return ResponseEntity.noContent().build();
 	}
 
 }

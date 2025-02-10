@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
 import { environment } from '../../../../enviroments/enviroment';
 import {
   Customer,
-  CustomerInsert,
+  CustomerSave,
   CustomerSearch,
 } from '../interfaces/customer.interface';
 import { PageResult } from '../../../interfaces/page-result.interface';
@@ -54,17 +54,34 @@ export class CustomerService {
   }
 
   public insert(
-    customerInsert: CustomerInsert,
+    customerSave: CustomerSave,
     logo: File | null
   ): Observable<void> {
     const formData: FormData = new FormData();
     formData.append(
       'customer',
-      new Blob([JSON.stringify(customerInsert)], { type: 'application/json' })
+      new Blob([JSON.stringify(customerSave)], { type: 'application/json' })
     );
     if (logo) {
       formData.append('logo', logo);
     }
     return this.httpClient.post<void>(this.customerBaseUrl, formData);
+  }
+
+  public update(
+    customerId: number,
+    customerSave: CustomerSave,
+    logo: File | null
+  ): Observable<void> {
+    const url = this.customerBaseUrl + '/' + customerId;
+    const formData: FormData = new FormData();
+    formData.append(
+      'customer',
+      new Blob([JSON.stringify(customerSave)], { type: 'application/json' })
+    );
+    if (logo) {
+      formData.append('logo', logo);
+    }
+    return this.httpClient.put<void>(url, formData);
   }
 }

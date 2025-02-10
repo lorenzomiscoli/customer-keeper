@@ -6,7 +6,7 @@ import { finalize, Subject, takeUntil } from 'rxjs';
 
 import { CustomerService } from '../../services/customer.service';
 import { SnackBarService } from '../../../../services/snackbar.service';
-import { CustomerAddForm } from '../../interfaces/customer.interface';
+import { CustomerSaveForm } from '../../interfaces/customer.interface';
 import { CUSTOMER_ADD_DEPS } from './customer-add.dependencies';
 
 @Component({
@@ -37,7 +37,7 @@ export default class CustomerAddComponent implements OnInit, OnDestroy {
   }
 
   private initializeForm(): void {
-    this.addForm = new FormGroup<CustomerAddForm>({
+    this.addForm = new FormGroup<CustomerSaveForm>({
       name: new FormControl('', {
         nonNullable: true,
         validators: [Validators.required],

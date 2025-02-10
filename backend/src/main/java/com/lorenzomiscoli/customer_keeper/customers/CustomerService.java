@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
 import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerInsertDTO;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSaveDto;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDTO;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
 
@@ -52,13 +52,27 @@ class CustomerService {
 		return new CustomerLogoDTO(logo, mimeType);
 	}
 
-	int insert(CustomerInsertDTO customerInsertDto, Optional<MultipartFile> logo) throws IOException {
-		var customer = new Customer(customerInsertDto.name(), customerInsertDto.email(), customerInsertDto.phone());
+	int insert(CustomerSaveDto customerSaveDto, Optional<MultipartFile> logo) throws IOException {
+		var customer = new Customer(customerSaveDto.name(), customerSaveDto.email(), customerSaveDto.phone());
 		if (logo.isPresent()) {
 			customer.setLogo(logo.get().getBytes());
 		}
 		customerRepo.save(customer);
 		return customer.getId();
+	}
+
+	void update(Integer id, CustomerSaveDto customerSaveDto, Optional<MultipartFile> logo) throws IOException {
+		Customer customer = customerRepo.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Customer with id: " + id + " could not be found"));
+		customer.setName(customerSaveDto.name());
+		customer.setPhone(customerSaveDto.phone());
+		customer.setEmail(customerSaveDto.email());
+		if (logo.isPresent()) {
+			customer.setLogo(logo.get().getBytes());
+		} else {
+			customer.setLogo(null);
+		}
+		customerRepo.save(customer);
 	}
 
 }

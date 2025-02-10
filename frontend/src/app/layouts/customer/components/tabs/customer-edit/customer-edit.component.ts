@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { filter, finalize, Subject, switchMap, takeUntil } from 'rxjs';
+import { finalize, Subject, switchMap, takeUntil } from 'rxjs';
 
-import { SnackBarService } from '../../../../../services/snackbar.service';
 import {
   Customer,
-  CustomerAddForm,
+  CustomerSaveForm,
 } from '../../../interfaces/customer.interface';
 import { CustomerService } from '../../../services/customer.service';
 import { CUSTOMER_EDIT_DEPS } from './customer-edit.dependencies';
@@ -22,27 +21,35 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   public editForm!: FormGroup;
   private selectedImage: File | null = null;
   public errorMessage = '';
+  public successMessage = '';
+  public isSaveDisabled = true;
+  public customerId!: number;
   public isLoading = false;
   public customerImageUrl: string | undefined;
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private customerService: CustomerService,
-    private router: Router,
-    private snackBarService: SnackBarService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.route.params
       .pipe(
-        filter((params) => params['id']),
         switchMap((params) => {
-          return this.customerService.findById(params['id']);
+          this.customerId = params['id'];
+          return this.customerService.findById(this.customerId);
         }),
         takeUntil(this.destroy$)
       )
-      .subscribe((customer) => this.updateForm(customer));
+      .subscribe({
+        next: (customer) => this.updateForm(customer),
+        error: (err) => {
+          this.errorMessage = err.error.message
+            ? err.error.message
+            : 'There was an error';
+        },
+      });
     this.initializeForm();
   }
 
@@ -52,7 +59,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   }
 
   private initializeForm(): void {
-    this.editForm = new FormGroup<CustomerAddForm>({
+    this.editForm = new FormGroup<CustomerSaveForm>({
       name: new FormControl('', {
         nonNullable: true,
         validators: [Validators.required],
@@ -65,6 +72,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   private updateForm(customer: Customer) {
     this.customerImageUrl = customer.logoLink;
     this.editForm.patchValue(customer);
+    this.isSaveDisabled = false;
   }
 
   public onImageChanged(image: File): void {
@@ -72,6 +80,23 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-
+    if (!this.editForm.valid) return;
+    this.isLoading = true;
+    this.customerService
+      .update(this.customerId, this.editForm.value, this.selectedImage)
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: () => {
+          this.successMessage = 'Customer successfully saved';
+          this.errorMessage = '';
+        },
+        error: (err) => {
+          this.successMessage = '';
+          this.errorMessage = err.error.message;
+        },
+      });
   }
 }
