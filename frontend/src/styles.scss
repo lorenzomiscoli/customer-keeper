@@ -1,8 +1,9 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-@use "./app/styles/theme-colors" as my-theme;
+@use "./app/styles/_theme-colors.scss" as my-theme;
 @use "./app/styles/_media-queries.scss" as media;
+@use "./app/styles/_variables.scss";
 
 html {
   @include mat.theme(
@@ -18,11 +19,6 @@ html {
   );
   @include mat.form-field-density(-5);
   @include mat.button-density(0);
-  @include mat.progress-spinner-overrides(
-    (
-      active-indicator-color: orange,
-    )
-  );
 }
 
 html,
@@ -82,20 +78,6 @@ body {
   box-sizing: border-box;
 }
 
-.success-message {
-  color: #1fa32e;
-  margin-top: 10px;
-}
-
-.snackbar-success {
-  --mdc-snackbar-container-color: #fff;
-  --mdc-snackbar-supporting-text-color: #1fa32e;
-}
-.snackbar-error {
-  --mdc-snackbar-container-color: #fff;
-  --mdc-snackbar-supporting-text-color: var(--mat-sys-error);
-}
-
 .container {
   margin-left: auto;
   margin-right: auto;
@@ -104,13 +86,23 @@ body {
   width: 100%;
 }
 
+.snackbar-success {
+  --mdc-snackbar-container-color: #fff;
+  --mdc-snackbar-supporting-text-color: var(--success-color);
+}
+
+.snackbar-error {
+  --mdc-snackbar-container-color: #fff;
+  --mdc-snackbar-supporting-text-color: var(--error-color);
+}
+
 .avatar {
   border-radius: 50%;
   object-fit: cover;
 }
 
 .inline-spinner {
-  display: inline-block;
+  display: inline-block !important;
   vertical-align: middle;
   margin-left: 8px;
 }
@@ -124,8 +116,14 @@ body {
     width: 300px;
   }
 
+  .success-message {
+    margin-top: 10px;
+    color: var(--success-color);
+  }
+
   .error-message {
     margin-top: 10px;
+    color: var(--error-color);
   }
 }
 

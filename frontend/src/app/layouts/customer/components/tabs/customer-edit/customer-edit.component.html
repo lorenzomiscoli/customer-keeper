@@ -41,13 +41,13 @@
       <mat-progress-spinner
         [mode]="'indeterminate'"
         [diameter]="16"
-        class="spinner"
+        class="inline-spinner"
       ></mat-progress-spinner>
       }
     </button>
     @if(errorMessage){
-    <mat-error class="error-message">{{ errorMessage }}</mat-error>
-    } @if(successMessage){
+    <div class="error-message">{{ errorMessage }}</div>
+    } @else if(successMessage){
     <div class="success-message">{{ successMessage }}</div>
     }
   </div>

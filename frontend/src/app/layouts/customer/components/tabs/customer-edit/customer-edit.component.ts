@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { finalize, Subject, switchMap, takeUntil } from 'rxjs';
 
+import { getHttpErrorMsg } from '../../../../../utils/string.utils';
 import {
   Customer,
   CustomerSaveForm,
@@ -45,9 +46,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (customer) => this.updateForm(customer),
         error: (err) => {
-          this.errorMessage = err.error.message
-            ? err.error.message
-            : 'There was an error';
+          this.errorMessage = getHttpErrorMsg(err);
         },
       });
     this.initializeForm();
@@ -82,11 +81,15 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     if (!this.editForm.valid) return;
     this.isLoading = true;
+    this.isSaveDisabled = true;
     this.customerService
       .update(this.customerId, this.editForm.value, this.selectedImage)
       .pipe(
         takeUntil(this.destroy$),
-        finalize(() => (this.isLoading = false))
+        finalize(() => {
+          this.isLoading = false;
+          this.isSaveDisabled = false;
+        })
       )
       .subscribe({
         next: () => {
@@ -94,8 +97,9 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
           this.errorMessage = '';
         },
         error: (err) => {
+          console.log(err);
           this.successMessage = '';
-          this.errorMessage = err.error.message;
+          this.errorMessage = getHttpErrorMsg(err);
         },
       });
   }
