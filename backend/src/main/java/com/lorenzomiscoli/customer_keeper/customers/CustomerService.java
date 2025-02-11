@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
-import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
+import com.lorenzomiscoli.customer_keeper.common.models.PageResultDto;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDto;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSaveDto;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDto;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDto;
 
 @Service
 class CustomerService {
@@ -28,16 +28,16 @@ class CustomerService {
 		this.customerRepo = customerRepo;
 	}
 
-	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
+	PageResultDto search(CustomerSearchDto customerSearchDto, Pageable pageable) {
 		return customerRepo.search(customerSearchDto, pageable);
 	}
 
-	CustomerDTO findById(Integer id) {
-		return customerRepo.findDTOById(id)
+	CustomerDto findById(Integer id) {
+		return customerRepo.findById(id).map(Customer::toDto)
 				.orElseThrow(() -> new RecordNotFoundException("Customer with id: " + id + " could not be found"));
 	}
 
-	CustomerLogoDTO findLogo(Integer id) {
+	CustomerLogoDto findLogo(Integer id) {
 		Customer customer = customerRepo.findById(id).get();
 		byte[] logo = customer.getLogo();
 		String mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
@@ -49,7 +49,7 @@ class CustomerService {
 				// TODO add logs
 			}
 		}
-		return new CustomerLogoDTO(logo, mimeType);
+		return new CustomerLogoDto(logo, mimeType);
 	}
 
 	int insert(CustomerSaveDto customerSaveDto, Optional<MultipartFile> logo) throws IOException {

@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
+import com.lorenzomiscoli.customer_keeper.common.models.PageResultDto;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDto;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -24,26 +24,26 @@ class CustomCustomerRepositoryImpl implements CustomCustomerRepository {
 	private EntityManager em;
 
 	@Override
-	public PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
+	public PageResultDto search(CustomerSearchDto customerSearchDto, Pageable pageable) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<CustomerDTO> cq = cb.createQuery(CustomerDTO.class);
+		CriteriaQuery<CustomerDto> cq = cb.createQuery(CustomerDto.class);
 		CriteriaQuery<Long> cqCount = cb.createQuery(Long.class);
-		List<CustomerDTO> customers = null;
+		List<CustomerDto> customers = null;
 		long countResult = 0;
 		Root<Customer> root = applyFilters(cq, cb, customerSearchDto, false);
-		cq.select(cb.construct(CustomerDTO.class, root.get("id"), root.get("name"), root.get("email"),
+		cq.select(cb.construct(CustomerDto.class, root.get("id"), root.get("name"), root.get("email"),
 				root.get("phone"), root.get("updatedDate")));
 		cqCount.select(cb.count(applyFilters(cqCount, cb, customerSearchDto, true))).distinct(true);
-		TypedQuery<CustomerDTO> query = em.createQuery(cq);
+		TypedQuery<CustomerDto> query = em.createQuery(cq);
 		query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
 		query.setMaxResults(pageable.getPageSize());
 		customers = query.getResultList();
 		countResult = em.createQuery(cqCount).getSingleResult();
 		var totalPages = (int) ((countResult - 1) / pageable.getPageSize()) + 1;
-		return new PageResultDTO(pageable.getPageNumber(), totalPages, countResult, customers);
+		return new PageResultDto(pageable.getPageNumber(), totalPages, countResult, customers);
 	}
 
-	private Root<Customer> applyFilters(CriteriaQuery<?> cq, CriteriaBuilder cb, CustomerSearchDTO customerSearchDto,
+	private Root<Customer> applyFilters(CriteriaQuery<?> cq, CriteriaBuilder cb, CustomerSearchDto customerSearchDto,
 			boolean noSort) {
 		Root<Customer> root = cq.from(Customer.class);
 		List<Predicate> predicatesList = new ArrayList<>();

@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lorenzomiscoli.customer_keeper.common.models.PageResultDTO;
+import com.lorenzomiscoli.customer_keeper.common.models.PageResultDto;
 import com.lorenzomiscoli.customer_keeper.common.validators.ValidLogoSize;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDTO;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDto;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSaveDto;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDTO;
-import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDTO;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDto;
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSearchDto;
 
 import jakarta.validation.Valid;
 
@@ -37,18 +37,18 @@ class CustomerController {
 	}
 
 	@GetMapping
-	PageResultDTO search(CustomerSearchDTO customerSearchDto, Pageable pageable) {
+	PageResultDto search(CustomerSearchDto customerSearchDto, Pageable pageable) {
 		return customerService.search(customerSearchDto, pageable);
 	}
 
 	@GetMapping("/{id}")
-	CustomerDTO findById(@PathVariable int id) {
+	CustomerDto findById(@PathVariable int id) {
 		return customerService.findById(id);
 	}
 
 	@GetMapping("/{id}/logo")
 	ResponseEntity<byte[]> findLogo(@PathVariable Integer id) {
-		CustomerLogoDTO customerLogoDto = customerService.findLogo(id);
+		CustomerLogoDto customerLogoDto = customerService.findLogo(id);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", customerLogoDto.mimeType());
 		return ResponseEntity.ok().headers(responseHeaders).body(customerLogoDto.logo());

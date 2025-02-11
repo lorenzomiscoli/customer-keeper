@@ -2,6 +2,8 @@ package com.lorenzomiscoli.customer_keeper.customers;
 
 import java.time.ZonedDateTime;
 
+import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,6 +47,10 @@ class Customer {
 	void prePersist() {
 		this.createdDate = ZonedDateTime.now();
 		this.updatedDate = ZonedDateTime.now();
+	}
+
+	CustomerDto toDto() {
+		return new CustomerDto(id, name, email, phone, updatedDate);
 	}
 
 	Integer getId() {
