@@ -1,22 +1,37 @@
-<mat-card appearance="outlined" [routerLink]="['details', customer().id]">
-  <mat-card-header>
-    <div class="header-container">
-      <img
-        #logo
-        class="avatar"
-        [src]="customer().logoLink"
-        width="48"
-        height="48"
-        (error)="logo.src = 'assets/images/default-user.svg'"
-      />
-      <mat-card-title>{{ customer().name }}</mat-card-title>
-    </div>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-icon [matTooltip]="customer().email">mail</mat-icon>
-    |
-    <mat-icon [matTooltip]="customer().phone">phone</mat-icon>
-    |
-    <p>{{ customer().updatedDate | appUpdatedDateFormat }}</p>
-  </mat-card-content>
-</mat-card>
+<ng-container *transloco="let t">
+  <mat-card appearance="outlined" [routerLink]="['details', customer().id]">
+    <mat-card-header>
+      <div class="header-container">
+        <img
+          #logo
+          class="avatar"
+          [src]="customer().logoLink"
+          width="48"
+          height="48"
+          (error)="logo.src = 'assets/images/default-user.svg'"
+        />
+        <mat-card-title>{{ customer().name }}</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-icon [matTooltip]="customer().email">mail</mat-icon>
+      |
+      <mat-icon [matTooltip]="customer().phone">phone</mat-icon>
+      |
+      <p>
+        {{ customer().updatedDate | appUpdatedDateFormat:{
+          today: t('today'),
+          yesterday: t('yesterday'),
+          dayAgo: t('dayAgo'),
+          daysAgo: t('daysAgo'),
+          weekAgo: t('weekAgo'),
+          weeksAgo: t('weeksAgo'),
+          monthAgo: t('monthAgo'),
+          monthsAgo: t('monthsAgo'),
+          yearAgo: t('yearAgo'),
+          yearsAgo: t('yearsAgo'),
+        } }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

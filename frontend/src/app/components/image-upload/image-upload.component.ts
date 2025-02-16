@@ -2,12 +2,14 @@ import { Component, effect, input, OnDestroy, output } from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
 
+import { TranslocoDirective } from '@jsverse/transloco';
 import { ImageUploadService } from './image-upload.service';
 
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrl: './image-upload.component.scss',
+  imports: [TranslocoDirective],
 })
 export class ImageUploadComponent implements OnDestroy {
   private selectedFile: File | null = null;

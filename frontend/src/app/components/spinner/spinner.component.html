@@ -1,0 +1,10 @@
+@if(isVisible$ | async;){
+<div class="spinner-container">
+  <div class="spinner">
+    <mat-progress-spinner
+      [mode]="'indeterminate'"
+      [diameter]="36"
+    ></mat-progress-spinner>
+  </div>
+</div>
+}

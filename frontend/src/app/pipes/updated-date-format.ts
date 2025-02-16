@@ -11,31 +11,45 @@ import {
   name: 'appUpdatedDateFormat',
 })
 export class UpdatedDateFormatPipe implements PipeTransform {
-  transform(value: string) {
+  transform(
+    value: string,
+    translations = {
+      today: 'today',
+      yesterday: 'yesterday',
+      dayAgo: 'day ago',
+      daysAgo: 'days ago',
+      weekAgo: 'week ago',
+      weeksAgo: 'weeks ago',
+      monthAgo: 'month ago',
+      monthsAgo: 'months ago',
+      yearAgo: 'year ago',
+      yearsAgo: 'years ago',
+    }
+  ) {
     let date = new Date(value);
     const days = getNumberOfDays(date);
     if (days === 0) {
-      return 'Updated Today';
+      return translations.today;
     } else if (days === 1) {
-      return 'Updated Yesterday';
+      return translations.yesterday;
     } else {
       const weeks = getNumberOfWeeks(date);
       if (weeks === 0) {
-        return 'Updated ' + days + ' days ago';
+        return days + ' ' + translations.daysAgo;
       } else if (weeks <= 4) {
         return weeks === 1
-          ? 'Updated ' + weeks + ' week ago'
-          : 'Updated ' + weeks + ' weeks ago';
+          ? weeks + ' ' + translations.weekAgo
+          : weeks + ' ' + translations.weeksAgo;
       } else if (weeks <= 52) {
         const months = getNumberOfMonths(date);
         return months === 1
-          ? 'Updated ' + months + ' month ago'
-          : 'Updated ' + months + ' months ago';
+          ? months + ' ' + translations.monthAgo
+          : months + ' ' + translations.monthsAgo;
       } else {
         const years = getNumberOfYears(date);
         return years === 1
-          ? 'Updated ' + years + ' year ago'
-          : 'Updated ' + years + ' years ago';
+          ? years + ' ' + translations.yearAgo
+          : years + ' ' + translations.yearsAgo;
       }
     }
   }

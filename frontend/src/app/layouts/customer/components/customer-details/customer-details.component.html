@@ -1,9 +1,15 @@
-<div class="container">
-  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" dynamicHeight>
-    <mat-tab label="Details">
-      <div class="tab">
-        <app-customer-edit></app-customer-edit>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+<ng-container *transloco="let t">
+  <div class="container">
+    <mat-tab-group
+      mat-stretch-tabs="false"
+      mat-align-tabs="start"
+      dynamicHeight
+    >
+      <mat-tab [label]="t('details')">
+        <div class="tab">
+          <app-customer-edit></app-customer-edit>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-container>

@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { TranslocoDirective } from '@jsverse/transloco';
 import { UpdatedDateFormatPipe } from '../../../../pipes/updated-date-format';
 
 export const CUSTOMER_CARD_DEPS = [
@@ -12,4 +13,5 @@ export const CUSTOMER_CARD_DEPS = [
   MatIconModule,
   MatTooltipModule,
   UpdatedDateFormatPipe,
+  TranslocoDirective,
 ];

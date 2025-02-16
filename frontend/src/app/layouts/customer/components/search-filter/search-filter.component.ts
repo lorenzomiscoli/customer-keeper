@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, output } from '@angular/core';
 
 import { MatSelectChange } from '@angular/material/select';
+import { TranslocoService } from '@jsverse/transloco';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 
 import { environment } from '../../../../../enviroments/enviroment';
@@ -26,12 +27,15 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
   public searchChanged = output<CustomerSearch>();
   private destroy$ = new Subject<boolean>();
 
+  constructor(private translocoService: TranslocoService) {}
+
   ngOnInit(): void {
     this.searchChanged$
       .pipe(takeUntil(this.destroy$), debounceTime(400))
       .subscribe((value) => {
         this.searchChanged.emit(value);
       });
+    this.handleTranslations();
   }
 
   ngOnDestroy(): void {
@@ -50,5 +54,15 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
   public onSelection(change: MatSelectChange): void {
     this.searchValue = '';
     this.search('', change.value);
+  }
+
+  private handleTranslations(): void {
+    this.translocoService
+      .selectTranslation()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.customerSortLabelMapping.NAME = value['name'];
+        this.customerSortLabelMapping.UPDATED_DATE = value['updatedDate'];
+      });
   }
 }

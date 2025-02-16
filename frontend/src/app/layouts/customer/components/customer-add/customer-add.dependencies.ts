@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 import { ImageUploadComponent } from '../../../../components/image-upload/image-upload.component';
 
@@ -20,4 +21,5 @@ export const CUSTOMER_ADD_DEPS = [
   MatProgressSpinnerModule,
   MatSelectModule,
   ImageUploadComponent,
+  TranslocoDirective,
 ];

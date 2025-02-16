@@ -1,54 +1,56 @@
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form">
-  <div class="logo-field-container">
-    <app-image-upload
-      [imageUrl]="customerImageUrl"
-      (imageChanged)="onImageChanged($event)"
-    ></app-image-upload>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input type="text" matInput formControlName="name" />
-      <mat-error>Name cannot be empty</mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input
-        type="email"
-        matInput
-        placeholder="email@example.com"
-        formControlName="email"
-      />
-      <mat-error>Email is not valid</mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>Phone</mat-label>
-      <input
-        type="tel"
-        matInput
-        placeholder="555-555-1234"
-        formControlName="phone"
-      />
-    </mat-form-field>
-  </div>
-  <div>
-    <button mat-flat-button [disabled]="isSaveDisabled">
-      Save customer @if(isLoading){
-      <mat-progress-spinner
-        [mode]="'indeterminate'"
-        [diameter]="16"
-        class="inline-spinner"
-      ></mat-progress-spinner>
+<ng-container *transloco="let t">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="logo-field-container">
+      <app-image-upload
+        [imageUrl]="customerImageUrl"
+        (imageChanged)="onImageChanged($event)"
+      ></app-image-upload>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{ t("name") }}</mat-label>
+        <input type="text" matInput formControlName="name" />
+        <mat-error>{{ t("nameNotEmpty") }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{ t("email") }}</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="email@example.com"
+          formControlName="email"
+        />
+        <mat-error>{{ t("emailNotValid") }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{ t("phone") }}</mat-label>
+        <input
+          type="tel"
+          matInput
+          placeholder="555-555-1234"
+          formControlName="phone"
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-flat-button [disabled]="isSaveDisabled">
+        {{ t("saveCustomer") }} @if(isLoading){
+        <mat-progress-spinner
+          [mode]="'indeterminate'"
+          [diameter]="16"
+          class="inline-spinner"
+        ></mat-progress-spinner>
+        }
+      </button>
+      @if(errorMessage){
+      <div class="error-message">{{ errorMessage }}</div>
+      } @else if(successMessage){
+      <div class="success-message">{{ successMessage }}</div>
       }
-    </button>
-    @if(errorMessage){
-    <div class="error-message">{{ errorMessage }}</div>
-    } @else if(successMessage){
-    <div class="success-message">{{ successMessage }}</div>
-    }
-  </div>
-</form>
+    </div>
+  </form>
+</ng-container>

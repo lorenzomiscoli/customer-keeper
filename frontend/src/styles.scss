@@ -26,6 +26,10 @@ body {
   height: 100%;
 }
 
+body:has(.spinner-container) {
+  overflow: hidden;
+}
+
 @font-face {
   font-family: "Montserrat";
   src: url("../public/assets/fonts/Montserrat-VariableFont_wght.ttf");

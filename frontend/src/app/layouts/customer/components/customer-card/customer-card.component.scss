@@ -16,8 +16,12 @@ mat-card-content {
     font-size: 18px;
   }
   p {
-    min-width: 160px;
     text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 120px;
+    overflow: hidden;
+    text-transform: lowercase;
   }
 }
 
