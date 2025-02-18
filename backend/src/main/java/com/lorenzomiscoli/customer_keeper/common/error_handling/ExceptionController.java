@@ -2,13 +2,14 @@ package com.lorenzomiscoli.customer_keeper.common.error_handling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
+import com.lorenzomiscoli.customer_keeper.common.exceptions.BadRequestException;
 
 @ControllerAdvice
 public class ExceptionController {
@@ -24,9 +25,14 @@ public class ExceptionController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseError("Maximum upload size exceeded"));
 	}
 
-	@ExceptionHandler(RecordNotFoundException.class)
-	public ResponseEntity<ResponseError> recordNotFound(RecordNotFoundException ex) {
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<ResponseError> handleValidations(BadRequestException ex) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseError(ex.getMessage()));
+	}
+
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<ResponseError> invalidCredentials(BadCredentialsException ex) {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseError(ex.getMessage()));
 	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)

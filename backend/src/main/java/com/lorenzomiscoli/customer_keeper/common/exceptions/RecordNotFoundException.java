@@ -1,6 +1,6 @@
 package com.lorenzomiscoli.customer_keeper.common.exceptions;
 
-public class RecordNotFoundException extends RuntimeException {
+public class RecordNotFoundException extends BadRequestException {
 
 	private static final long serialVersionUID = -6966014559194331025L;
 
