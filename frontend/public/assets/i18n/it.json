@@ -21,5 +21,13 @@
   "monthAgo":"Mese fa",
   "monthsAgo":"Mesi fa",
   "yearAgo":"Anno fa",
-  "yearsAgo":"Anni fa"
+  "yearsAgo":"Anni fa",
+  "username":"Nome utente",
+  "password":"Password",
+  "usernameNotEmpty":"Il nome utente non può essere vuoto",
+  "passwordNotEmpty":"La password non può essere vuota",
+  "login":"Login",
+  "userSettings":"Impostazioni utente",
+  "about":"Su di noi",
+  "logout":"Esci"
 }

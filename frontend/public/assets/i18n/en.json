@@ -21,5 +21,13 @@
   "monthAgo":"Month ago",
   "monthsAgo":"Months ago",
   "yearAgo":"Year ago",
-  "yearsAgo":"Years ago"
+  "yearsAgo":"Years ago",
+  "username":"Username",
+  "password":"Password",
+  "usernameNotEmpty":"Username cannot be empty",
+  "passwordNotEmpty":"Password cannot be empty",
+  "login":"Login",
+  "userSettings":"User settings",
+  "about":"About",
+  "logout":"Logout"
 }

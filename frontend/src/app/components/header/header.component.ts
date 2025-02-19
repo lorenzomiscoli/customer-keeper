@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { AuthenticationService } from '../../services/authentication.service';
+import { HEADER_DEPS } from './header.dependencies';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [MatButtonModule, MatIconModule, RouterLink],
+  imports: [HEADER_DEPS],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  constructor(private authService: AuthenticationService) {}
+
+  public logout(): void {
+    this.authService.logout();
+  }
+}

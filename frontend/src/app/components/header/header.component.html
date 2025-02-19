@@ -1,20 +1,36 @@
-<header class="header">
-  <nav>
-    <div class="container">
-      <div>
-        <img
-          src="assets/images/customer-keeper-logo.svg"
-          alt="Customer Keeper logo"
-          width="160"
-          height="37"
-          routerLink="/"
-        />
+<ng-container *transloco="let t">
+  <header class="header">
+    <nav>
+      <div class="container">
+        <div>
+          <img
+            src="assets/images/customer-keeper-logo.svg"
+            alt="Customer Keeper logo"
+            width="160"
+            height="37"
+            routerLink="/"
+          />
+        </div>
+        <div>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span>{{t('userSettings')}}</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>info</mat-icon>
+              <span>{{t('about')}}</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>{{t('logout')}}</span>
+            </button>
+          </mat-menu>
+        </div>
       </div>
-      <div>
-        <button mat-icon-button>
-          <mat-icon>account_circle</mat-icon>
-        </button>
-      </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
+</ng-container>
