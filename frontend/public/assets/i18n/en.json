@@ -29,5 +29,7 @@
   "login":"Login",
   "userSettings":"User settings",
   "about":"About",
-  "logout":"Logout"
+  "logout":"Logout",
+  "version":"Version",
+  "close":"Close"
 }

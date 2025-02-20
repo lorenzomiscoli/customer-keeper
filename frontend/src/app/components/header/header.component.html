@@ -18,15 +18,15 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item>
               <mat-icon>settings</mat-icon>
-              <span>{{t('userSettings')}}</span>
+              <span>{{ t("userSettings") }}</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="openAboutDialog()">
               <mat-icon>info</mat-icon>
-              <span>{{t('about')}}</span>
+              <span>{{ t("about") }}</span>
             </button>
             <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>
-              <span>{{t('logout')}}</span>
+              <span>{{ t("logout") }}</span>
             </button>
           </mat-menu>
         </div>
