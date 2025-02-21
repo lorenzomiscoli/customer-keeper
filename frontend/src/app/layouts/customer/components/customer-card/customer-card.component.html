@@ -5,7 +5,7 @@
         <img
           #logo
           class="avatar"
-          [src]="customer().logoLink"
+          [attr.src]="customer().logoLink | appSecureImage | async"
           width="48"
           height="48"
           (error)="logo.src = 'assets/images/default-user.svg'"
@@ -20,17 +20,17 @@
       |
       <p>
         {{ customer().updatedDate | appUpdatedDateFormat:{
-          today: t('today'),
-          yesterday: t('yesterday'),
-          dayAgo: t('dayAgo'),
-          daysAgo: t('daysAgo'),
-          weekAgo: t('weekAgo'),
-          weeksAgo: t('weeksAgo'),
-          monthAgo: t('monthAgo'),
-          monthsAgo: t('monthsAgo'),
-          yearAgo: t('yearAgo'),
-          yearsAgo: t('yearsAgo'),
-        } }}
+            today: t('today'),
+            yesterday: t('yesterday'),
+            dayAgo: t('dayAgo'),
+            daysAgo: t('daysAgo'),
+            weekAgo: t('weekAgo'),
+            weeksAgo: t('weeksAgo'),
+            monthAgo: t('monthAgo'),
+            monthsAgo: t('monthsAgo'),
+            yearAgo: t('yearAgo'),
+            yearsAgo: t('yearsAgo'),
+          } }}
       </p>
     </mat-card-content>
   </mat-card>
