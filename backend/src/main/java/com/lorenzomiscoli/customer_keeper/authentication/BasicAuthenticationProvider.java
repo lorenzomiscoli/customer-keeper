@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.lorenzomiscoli.customer_keeper.common.translation.MessageService;
+
 import java.util.ArrayList;
 
 @Component
@@ -20,9 +22,13 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
 
 	private final PasswordEncoder encoder;
 
-	BasicAuthenticationProvider(UserDetailsService userServ, PasswordEncoder encoder) {
+	private final MessageService messageService;
+
+	BasicAuthenticationProvider(UserDetailsService userServ, PasswordEncoder encoder, MessageService messageService) {
+		super();
 		this.userServ = userServ;
 		this.encoder = encoder;
+		this.messageService = messageService;
 	}
 
 	@Override
@@ -35,9 +41,9 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
 				return new UsernamePasswordAuthenticationToken(name, password, new ArrayList<>());
 			}
 		} catch (UsernameNotFoundException e) {
-			throw new BadCredentialsException("Invalid username or password");
+			throw new BadCredentialsException(messageService.getLocalizedMessage("invalid-username-password"));
 		}
-		throw new BadCredentialsException("Invalid username or password");
+		throw new BadCredentialsException(messageService.getLocalizedMessage("invalid-username-password"));
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.lorenzomiscoli.customer_keeper.common.translation.MessageService;
 import com.lorenzomiscoli.customer_keeper.users.UserService;
 import com.lorenzomiscoli.customer_keeper.users.models.UserLoginDto;
 
@@ -19,15 +20,20 @@ class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final PasswordEncoder encoder;
 
-	UserDetailsServiceImpl(UserService userService, PasswordEncoder encoder) {
+	private final MessageService messageService;
+
+	UserDetailsServiceImpl(UserService userService, PasswordEncoder encoder, MessageService messageService) {
+		super();
 		this.userService = userService;
 		this.encoder = encoder;
+		this.messageService = messageService;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserLoginDto user = userService.findCredentialsByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+				.orElseThrow(() -> new UsernameNotFoundException(
+						messageService.getLocalizedMessage("user-username-not-exists", new Object[] { username })));
 		return new org.springframework.security.core.userdetails.User(user.username(), user.password(),
 				new ArrayList<>());
 	}
@@ -39,9 +45,9 @@ class UserDetailsServiceImpl implements UserDetailsService {
 				return user;
 			}
 		} catch (UsernameNotFoundException e) {
-			throw new BadCredentialsException("Invalid username or password");
+			throw new BadCredentialsException(messageService.getLocalizedMessage("invalid-username-password"));
 		}
-		throw new BadCredentialsException("Invalid username or password");
+		throw new BadCredentialsException(messageService.getLocalizedMessage("invalid-username-password"));
 	}
 
 	private boolean comparePasswords(String enteredCred, String userCred) {

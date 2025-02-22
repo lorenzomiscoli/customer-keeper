@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
 import com.lorenzomiscoli.customer_keeper.common.models.PageResultDto;
+import com.lorenzomiscoli.customer_keeper.common.translation.MessageService;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerDto;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerSaveDto;
 import com.lorenzomiscoli.customer_keeper.customers.models.CustomerLogoDto;
@@ -24,8 +25,12 @@ class CustomerService {
 
 	private final CustomerRepository customerRepo;
 
-	CustomerService(CustomerRepository customerRepo) {
+	private final MessageService messageService;
+
+	CustomerService(CustomerRepository customerRepo, MessageService messageService) {
+		super();
 		this.customerRepo = customerRepo;
+		this.messageService = messageService;
 	}
 
 	PageResultDto search(CustomerSearchDto customerSearchDto, Pageable pageable) {
@@ -33,8 +38,8 @@ class CustomerService {
 	}
 
 	CustomerDto findById(Integer id) {
-		return customerRepo.findById(id).map(Customer::toDto)
-				.orElseThrow(() -> new RecordNotFoundException("Customer with id: " + id + " could not be found"));
+		return customerRepo.findById(id).map(Customer::toDto).orElseThrow(() -> new RecordNotFoundException(
+				messageService.getLocalizedMessage("customer-id-not-exists", new Object[] { id })));
 	}
 
 	CustomerLogoDto findLogo(Integer id) {
@@ -62,8 +67,8 @@ class CustomerService {
 	}
 
 	void update(Integer id, CustomerSaveDto customerSaveDto, Optional<MultipartFile> logo) throws IOException {
-		Customer customer = customerRepo.findById(id)
-				.orElseThrow(() -> new RecordNotFoundException("Customer with id: " + id + " could not be found"));
+		Customer customer = customerRepo.findById(id).orElseThrow(() -> new RecordNotFoundException(
+				messageService.getLocalizedMessage("customer-id-not-exists", new Object[] { id })));
 		customer.setName(customerSaveDto.name());
 		customer.setPhone(customerSaveDto.phone());
 		customer.setEmail(customerSaveDto.email());

@@ -10,9 +10,16 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.lorenzomiscoli.customer_keeper.common.exceptions.BadRequestException;
+import com.lorenzomiscoli.customer_keeper.common.translation.MessageService;
 
 @ControllerAdvice
 public class ExceptionController {
+
+	private final MessageService messageService;
+
+	ExceptionController(MessageService messageService) {
+		this.messageService = messageService;
+	}
 
 	@ExceptionHandler(HandlerMethodValidationException.class)
 	public ResponseEntity<ResponseError> handleValidations(HandlerMethodValidationException ex) {
@@ -22,7 +29,8 @@ public class ExceptionController {
 
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public ResponseEntity<ResponseError> maxUpload(MaxUploadSizeExceededException ex) {
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseError("Maximum upload size exceeded"));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(new ResponseError(messageService.getLocalizedMessage("max-upload-error")));
 	}
 
 	@ExceptionHandler(BadRequestException.class)
@@ -37,13 +45,15 @@ public class ExceptionController {
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ResponseError> notFound(NoHandlerFoundException ex) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseError("URL not found"));
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(new ResponseError(messageService.getLocalizedMessage("not-found-error")));
 	}
 
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<ResponseError> genericError(Exception ex) {
 		ex.printStackTrace();
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseError("Something went wrong"));
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+				.body(new ResponseError(messageService.getLocalizedMessage("generic-error")));
 	}
 
 }

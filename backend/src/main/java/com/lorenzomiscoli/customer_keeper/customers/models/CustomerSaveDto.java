@@ -1,13 +1,11 @@
 package com.lorenzomiscoli.customer_keeper.customers.models;
 
-import com.lorenzomiscoli.customer_keeper.common.validators.NoHtml;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record CustomerSaveDto(
-		@NotBlank(message = "Name cannot be empty") @Size(max = 75, message = "Name is too long") @NoHtml(message = " Name contains invalid characters") String name,
-		@Email(message = "Invalid email") @Size(max = 50, message = "Email is too long") @NoHtml(message = " Email contains invalid characters") String email,
-		@Size(max = 25, message = "Phone is too long") @NoHtml(message = " Phone contains invalid characters") String phone) {
+		@NotBlank(message = "{name-empty-error}") @Size(max = 75, message = "{name-exceeds-error}") String name,
+		@Email(message = "{invalid-email-error}") @Size(max = 50, message = "{email-exceeds-error}") String email,
+		@Size(max = 25, message = "{phone-exceeds-error}") String phone) {
 }

@@ -8,6 +8,7 @@ import { CustomerService } from '../../services/customer.service';
 import { SnackBarService } from '../../../../services/snackbar.service';
 import { CustomerSaveForm } from '../../interfaces/customer.interface';
 import { CUSTOMER_ADD_DEPS } from './customer-add.dependencies';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Component({
   templateUrl: './customer-add.component.html',
@@ -19,16 +20,19 @@ export default class CustomerAddComponent implements OnInit, OnDestroy {
   private selectedImage: File | null = null;
   public errorMessage = '';
   public isLoading = false;
+  public successMessage = '';
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private customerService: CustomerService,
     private router: Router,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.handleTranslations();
   }
 
   ngOnDestroy(): void {
@@ -45,6 +49,15 @@ export default class CustomerAddComponent implements OnInit, OnDestroy {
       email: new FormControl(null, Validators.email),
       phone: new FormControl(null),
     });
+  }
+
+  public handleTranslations(): void {
+    this.translocoService
+      .selectTranslate('customerSaved')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.successMessage = value;
+      });
   }
 
   public onImageChanged(image: File): void {
@@ -64,7 +77,7 @@ export default class CustomerAddComponent implements OnInit, OnDestroy {
         next: () => {
           this.errorMessage = '';
           this.router.navigate(['/customers']);
-          this.snackBarService.success('Customer successfully saved');
+          this.snackBarService.success(this.successMessage);
         },
         error: (err) => {
           this.errorMessage = err.error.message;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.lorenzomiscoli.customer_keeper.common.exceptions.InvalidValueException;
 import com.lorenzomiscoli.customer_keeper.common.exceptions.RecordNotFoundException;
+import com.lorenzomiscoli.customer_keeper.common.translation.MessageService;
 import com.lorenzomiscoli.customer_keeper.users.models.UserDto;
 import com.lorenzomiscoli.customer_keeper.users.models.UserLoginDto;
 import com.lorenzomiscoli.customer_keeper.users.models.UserUpdateDto;
@@ -18,19 +19,23 @@ public class UserService {
 
 	private final PasswordEncoder encoder;
 
-	UserService(UserRepository userRepo, PasswordEncoder encoder) {
+	private final MessageService messageService;
+
+	UserService(UserRepository userRepo, PasswordEncoder encoder, MessageService messageService) {
+		super();
 		this.userRepo = userRepo;
 		this.encoder = encoder;
+		this.messageService = messageService;
 	}
 
 	User findByUsername(String username) {
-		return userRepo.findByUsername(username).orElseThrow(
-				() -> new RecordNotFoundException("User with username: " + username + " could not be found"));
+		return userRepo.findByUsername(username).orElseThrow(() -> new RecordNotFoundException(
+				messageService.getLocalizedMessage("user-username-not-exists", new Object[] { username })));
 	}
 
 	UserDto findDtoByUsername(String username) {
-		return userRepo.findByUsername(username).map(User::toDto).orElseThrow(
-				() -> new RecordNotFoundException("User with username: " + username + " could not be found"));
+		return userRepo.findByUsername(username).map(User::toDto).orElseThrow(() -> new RecordNotFoundException(
+				messageService.getLocalizedMessage("user-username-not-exists", new Object[] { username })));
 	}
 
 	public Optional<UserLoginDto> findCredentialsByUsername(String username) {
@@ -40,10 +45,10 @@ public class UserService {
 	void updatePwd(String username, String oldPwd, String newPwd) {
 		var user = findByUsername(username);
 		if (!encoder.matches(oldPwd, user.getPassword())) {
-			throw new InvalidValueException("Old password doesn't match the current one");
+			throw new InvalidValueException(messageService.getLocalizedMessage("old-pwd-not-matches"));
 		}
 		if (oldPwd.equals(newPwd)) {
-			throw new InvalidValueException("New password cannot be equal to old password");
+			throw new InvalidValueException(messageService.getLocalizedMessage("new-pwd-is-same"));
 		}
 		user.setPassword(encoder.encode(newPwd));
 		userRepo.save(user);

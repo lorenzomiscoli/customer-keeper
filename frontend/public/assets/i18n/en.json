@@ -31,5 +31,6 @@
   "about":"About",
   "logout":"Logout",
   "version":"Version",
-  "close":"Close"
+  "close":"Close",
+  "customerSaved":"Customer successfully saved"
 }

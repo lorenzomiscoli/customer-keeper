@@ -4,6 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserPasswordUpdateDto(
-		@NotBlank(message = "Old password cannot be empty") @Size(max = 250, message = "Old password is too long") String oldPassword,
-		@NotBlank(message = "New password cannot be empty") @Size(max = 250, message = "New password is too long") String newPassword) {
+		@NotBlank(message = "{old-password-empty-error}") @Size(max = 250, message = "{old-password-exceeds-error}") String oldPassword,
+		@NotBlank(message = "{new-password-empty-error}") @Size(max = 250, message = "{new-password-exceeds-error}") String newPassword) {
 }
