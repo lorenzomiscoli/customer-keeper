@@ -19,6 +19,7 @@ html {
   );
   @include mat.form-field-density(-5);
   @include mat.button-density(0);
+  @include mat.list-density(-2);
 }
 
 html,

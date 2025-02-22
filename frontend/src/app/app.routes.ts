@@ -20,4 +20,11 @@ export const routes: Routes = [
     children: CUSTOMER_ROUTES,
     canActivate: [authenticationGuard],
   },
+  {
+    path: 'user-settings',
+    title: 'User Settings | Customer Keeper',
+    loadComponent: () =>
+      import('./layouts/user-settings/user-settings.component'),
+    canActivate: [authenticationGuard],
+  },
 ];

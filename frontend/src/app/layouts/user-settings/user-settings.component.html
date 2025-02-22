@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="sidebar">
+    <mat-nav-list class="nav-list">
+      <a
+        mat-list-item
+        class="nav-item"
+        (click)="selectedTab = 0"
+        [class]="{ active: selectedTab === 0 }"
+        >Profile info</a
+      >
+      <a
+        mat-list-item
+        class="nav-item"
+        (click)="selectedTab = 1"
+        [class]="{ active: selectedTab === 1 }"
+        >Security settings</a
+      >
+    </mat-nav-list>
+  </div>
+  <div class="content">
+    <mat-tab-group [(selectedIndex)]="selectedTab">
+      <mat-tab>Mat 1</mat-tab>
+      <mat-tab>Mat 2</mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
