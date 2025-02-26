@@ -32,5 +32,9 @@
   "logout":"Logout",
   "version":"Version",
   "close":"Close",
-  "customerSaved":"Customer successfully saved"
+  "customerSaved":"Customer successfully saved",
+  "lastname":"Lastname",
+  "savedSuccessfully":"Saved successfully",
+  "securitySettings":"Security settings",
+  "profileInfo":"Profile info"
 }

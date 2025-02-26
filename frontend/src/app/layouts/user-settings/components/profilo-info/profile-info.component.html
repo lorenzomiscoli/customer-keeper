@@ -1,0 +1,47 @@
+<ng-container *transloco="let t">
+  <div class="container super">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form">
+      <div>
+        <mat-form-field>
+          <mat-label>{{ t("username") }}</mat-label>
+          <input type="text" matInput formControlName="username" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>{{ t("name") }}</mat-label>
+          <input type="text" matInput formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>{{ t("lastname") }}</mat-label>
+          <input type="text" matInput formControlName="lastname" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>{{ t("email") }}</mat-label>
+          <input type="email" matInput formControlName="email" />
+          <mat-error>{{ t("emailNotValid") }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-flat-button [disabled]="isSaveDisabled">
+          {{ t("save") }} @if(isLoading){
+          <mat-progress-spinner
+            [mode]="'indeterminate'"
+            [diameter]="16"
+            class="inline-spinner"
+          ></mat-progress-spinner>
+          }
+        </button>
+        @if(errorMessage){
+        <div class="error-message">{{ errorMessage }}</div>
+        }@else if(successMessage){
+        <div class="success-message">{{ t(successMessage) }}</div>
+        }
+      </div>
+    </form>
+  </div>
+</ng-container>

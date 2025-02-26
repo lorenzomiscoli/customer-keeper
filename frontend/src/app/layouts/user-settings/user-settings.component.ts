@@ -8,5 +8,4 @@ import { USER_SETTINGS_DEPS } from './user-settings.dependencies';
 })
 export default class UserSettingsComponent {
   public selectedTab: number = 0;
-
 }

@@ -21,6 +21,10 @@ $margin-top: 30px;
   width: 100%;
 }
 
+:host ::ng-deep form{
+  margin-top: 5px;
+}
+
 :host ::ng-deep .mat-mdc-tab-labels {
   display: none;
 }

@@ -3,6 +3,7 @@ package com.lorenzomiscoli.customer_keeper.common.error_handling;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
@@ -19,6 +20,12 @@ public class ExceptionController {
 
 	ExceptionController(MessageService messageService) {
 		this.messageService = messageService;
+	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ResponseError> handleValidation(MethodArgumentNotValidException ex) {
+		String responseMsg = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseError(responseMsg));
 	}
 
 	@ExceptionHandler(HandlerMethodValidationException.class)

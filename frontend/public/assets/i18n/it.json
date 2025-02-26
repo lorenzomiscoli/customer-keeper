@@ -32,5 +32,9 @@
   "logout":"Esci",
   "version":"Versione",
   "close":"Chiudi",
-  "customerSaved":"Cliente salvato correttamente"
+  "customerSaved":"Cliente salvato correttamente",
+  "lastname":"Cognome",
+  "savedSuccessfully":"Salvato con successo",
+  "securitySettings":"Impostazione di sicurezza",
+  "profileInfo":"Dettagli profilo"
 }
