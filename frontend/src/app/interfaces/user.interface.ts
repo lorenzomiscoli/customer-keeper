@@ -15,3 +15,8 @@ export interface UserUpdate {
   lastname: string;
   email: string;
 }
+
+export interface UserPasswordUpdate {
+  oldPassword: string;
+  newPassword: string;
+}

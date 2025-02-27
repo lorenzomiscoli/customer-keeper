@@ -36,5 +36,10 @@
   "lastname":"Lastname",
   "savedSuccessfully":"Saved successfully",
   "securitySettings":"Security settings",
-  "profileInfo":"Profile info"
+  "profileInfo":"Profile info",
+  "oldPassword":"Old password",
+  "newPassword":"New password",
+  "confirmNewPassword":"Confirm new password",
+  "requiredField":"Required field",
+  "passwordsMismatch":"Passwords don't match"
 }

@@ -36,5 +36,10 @@
   "lastname":"Cognome",
   "savedSuccessfully":"Salvato con successo",
   "securitySettings":"Impostazione di sicurezza",
-  "profileInfo":"Dettagli profilo"
+  "profileInfo":"Dettagli profilo",
+  "oldPassword":"Vecchia password",
+  "newPassword":"Nuova password",
+  "confirmNewPassword":"Conferma nuova password",
+  "requiredField":"Campo richiesto",
+  "passwordsMismatch":"Le password non corrispondono"
 }

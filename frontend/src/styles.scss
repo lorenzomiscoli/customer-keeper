@@ -110,6 +110,11 @@ body {
   display: inline-block !important;
   vertical-align: middle;
   margin-left: 8px;
+  @include mat.progress-spinner-overrides(
+    (
+      active-indicator-color: #ffb703,
+    )
+  );
 }
 
 .form {

@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { environment } from '../../enviroments/enviroment';
-import { UserProfile, UserUpdate } from '../interfaces/user.interface';
+import {
+  UserPasswordUpdate,
+  UserProfile,
+  UserUpdate,
+} from '../interfaces/user.interface';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +17,10 @@ import { UserProfile, UserUpdate } from '../interfaces/user.interface';
 export class UserService {
   private readonly userBaseUrl = environment.baseUrl + '/users';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private authService: AuthenticationService,
+    private httpClient: HttpClient
+  ) {}
 
   // Retrive user by Basic Authentication
   public findByAuth(): Observable<UserProfile> {
@@ -26,5 +34,26 @@ export class UserService {
       this.userBaseUrl + '/authenticated',
       userUpdate
     );
+  }
+
+  public updatePassword(
+    userPasswordUpdate: UserPasswordUpdate
+  ): Observable<void> {
+    return this.httpClient
+      .patch<void>(
+        this.userBaseUrl + '/authenticated/password',
+        userPasswordUpdate
+      )
+      .pipe(
+        tap(() => {
+          const userData = sessionStorage.getItem('user');
+          if (userData) {
+            const parsedUserData = JSON.parse(userData);
+            parsedUserData.password = userPasswordUpdate.newPassword;
+            sessionStorage.setItem('user', JSON.stringify(parsedUserData));
+            this.authService.user$.next(parsedUserData);
+          }
+        })
+      );
   }
 }

@@ -5,6 +5,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { UserService } from '../../../../services/user.service';
 import { getHttpErrorMsg } from '../../../../utils/string.utils';
+import { UserUpdateForm } from '../../user.interface';
 import { PROFILE_INFO_DEPS } from './profile-info.dependencies';
 
 @Component({
@@ -44,14 +45,17 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
   }
 
   private initializeForm(): void {
-    this.editForm = new FormGroup({
-      username: new FormControl({
-        value: '',
-        disabled: true,
-      }),
-      name: new FormControl(),
-      lastname: new FormControl(),
-      email: new FormControl(),
+    this.editForm = new FormGroup<UserUpdateForm>({
+      username: new FormControl(
+        {
+          value: '',
+          disabled: true,
+        },
+        { nonNullable: true }
+      ),
+      name: new FormControl(null),
+      lastname: new FormControl(null),
+      email: new FormControl(null),
     });
   }
 
