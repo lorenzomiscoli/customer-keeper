@@ -37,7 +37,12 @@ class CustomerService {
 		return customerRepo.search(customerSearchDto, pageable);
 	}
 
-	CustomerDto findById(Integer id) {
+	Customer findById(Integer id) {
+		return customerRepo.findById(id).orElseThrow(() -> new RecordNotFoundException(
+				messageService.getLocalizedMessage("customer-id-not-exists", new Object[] { id })));
+	}
+
+	CustomerDto findDtoById(Integer id) {
 		return customerRepo.findById(id).map(Customer::toDto).orElseThrow(() -> new RecordNotFoundException(
 				messageService.getLocalizedMessage("customer-id-not-exists", new Object[] { id })));
 	}
@@ -67,8 +72,7 @@ class CustomerService {
 	}
 
 	void update(Integer id, CustomerSaveDto customerSaveDto, Optional<MultipartFile> logo) throws IOException {
-		Customer customer = customerRepo.findById(id).orElseThrow(() -> new RecordNotFoundException(
-				messageService.getLocalizedMessage("customer-id-not-exists", new Object[] { id })));
+		Customer customer = findById(id);
 		customer.setName(customerSaveDto.name());
 		customer.setPhone(customerSaveDto.phone());
 		customer.setEmail(customerSaveDto.email());
@@ -78,6 +82,10 @@ class CustomerService {
 			customer.setLogo(null);
 		}
 		customerRepo.save(customer);
+	}
+
+	void delete(Integer id) {
+		customerRepo.delete(findById(id));
 	}
 
 }

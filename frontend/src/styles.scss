@@ -142,6 +142,24 @@ body {
   min-height: 150px;
 }
 
+.delete-btn {
+  @include mat.button-overrides(
+    (
+      outlined-outline-color: var(--error-color),
+      outlined-label-text-color: var(--error-color),
+    )
+  );
+}
+
+.delete-dialog-btn {
+  @include mat.button-overrides(
+    (
+      text-label-text-color:var(--error-color),
+      text-state-layer-color:var(--error-color)
+    )
+  );
+}
+
 @include media.respond-above(sm) {
   .container {
     max-width: 540px;

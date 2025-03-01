@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +44,7 @@ class CustomerController {
 
 	@GetMapping("/{id}")
 	CustomerDto findById(@PathVariable int id) {
-		return customerService.findById(id);
+		return customerService.findDtoById(id);
 	}
 
 	@GetMapping("/{id}/logo")
@@ -55,8 +56,7 @@ class CustomerController {
 	}
 
 	@PostMapping
-	ResponseEntity<Void> insert(
-			@RequestPart("customer") @Valid CustomerSaveDto customerSaveDto,
+	ResponseEntity<Void> insert(@RequestPart("customer") @Valid CustomerSaveDto customerSaveDto,
 			@RequestPart("logo") @ValidLogoSize Optional<MultipartFile> logo) throws IOException {
 		int id = customerService.insert(customerSaveDto, logo);
 		URI loc = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
@@ -67,6 +67,12 @@ class CustomerController {
 	ResponseEntity<Void> update(@PathVariable int id, @RequestPart("customer") @Valid CustomerSaveDto customerSaveDto,
 			@RequestPart("logo") @ValidLogoSize Optional<MultipartFile> logo) throws IOException {
 		customerService.update(id, customerSaveDto, logo);
+		return ResponseEntity.noContent().build();
+	}
+
+	@DeleteMapping("/{id}")
+	ResponseEntity<Void> delete(@PathVariable int id) {
+		customerService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 

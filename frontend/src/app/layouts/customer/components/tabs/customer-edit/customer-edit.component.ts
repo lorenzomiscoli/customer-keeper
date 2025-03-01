@@ -11,6 +11,8 @@ import {
 } from '../../../interfaces/customer.interface';
 import { CustomerService } from '../../../services/customer.service';
 import { CUSTOMER_EDIT_DEPS } from './customer-edit.dependencies';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteCustomerDialog } from '../../delete-customer-dialog/delete-customer-dialog.component';
 
 @Component({
   selector: 'app-customer-edit',
@@ -31,7 +33,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private customerService: CustomerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +79,12 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
   public onImageChanged(image: File): void {
     this.selectedImage = image;
+  }
+
+  public openDeleteDialog(): void {
+    this.matDialog.open(DeleteCustomerDialog, {
+      data: { customerId: this.customerId },
+    });
   }
 
   public onSubmit(): void {

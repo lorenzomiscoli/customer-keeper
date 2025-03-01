@@ -37,6 +37,14 @@
       </mat-form-field>
     </div>
     <div>
+      <button
+        type="button"
+        mat-stroked-button
+        class="delete-btn"
+        (click)="openDeleteDialog()"
+      >
+        {{ t("delete") }}
+      </button>
       <button mat-flat-button [disabled]="isSaveDisabled">
         {{ t("saveCustomer") }} @if(isLoading){
         <mat-progress-spinner
@@ -49,7 +57,7 @@
       @if(errorMessage){
       <div class="error-message">{{ errorMessage }}</div>
       } @else if(successMessage){
-      <div class="success-message">{{ t('customerSaved') }}</div>
+      <div class="success-message">{{ t("customerSaved") }}</div>
       }
     </div>
   </form>

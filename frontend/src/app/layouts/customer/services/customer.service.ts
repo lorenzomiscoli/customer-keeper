@@ -84,4 +84,9 @@ export class CustomerService {
     }
     return this.httpClient.put<void>(url, formData);
   }
+
+  public delete(customerId: number): Observable<void> {
+    const url = this.customerBaseUrl + '/' + customerId;
+    return this.httpClient.delete<void>(url);
+  }
 }

@@ -41,5 +41,9 @@
   "newPassword":"Nuova password",
   "confirmNewPassword":"Conferma nuova password",
   "requiredField":"Campo richiesto",
-  "passwordsMismatch":"Le password non corrispondono"
+  "passwordsMismatch":"Le password non corrispondono",
+  "delete":"Elimina",
+  "deleteCustomer":"Elimina cliente",
+  "deleteCustomerMsg":"Sei sicuro di voler eliminare questo cliente?",
+  "deletedSuccessfully":"Eliminato con successo"
 }

@@ -1,0 +1,20 @@
+<ng-container *transloco="let t">
+  <h2 mat-dialog-title>{{ t("deleteCustomer") }}</h2>
+  <mat-dialog-content>
+    <p>{{ t("deleteCustomerMsg") }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button cdkFocusInitial mat-dialog-close>
+      {{ t("close") }}
+    </button>
+    <button mat-button class="delete-dialog-btn" (click)="delete(t('deletedSuccessfully'))">
+      {{ t("delete") }} @if(isLoading){
+      <mat-progress-spinner
+        [mode]="'indeterminate'"
+        [diameter]="16"
+        class="inline-spinner"
+      ></mat-progress-spinner>
+      }
+    </button>
+  </mat-dialog-actions>
+</ng-container>

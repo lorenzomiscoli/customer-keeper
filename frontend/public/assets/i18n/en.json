@@ -41,5 +41,9 @@
   "newPassword":"New password",
   "confirmNewPassword":"Confirm new password",
   "requiredField":"Required field",
-  "passwordsMismatch":"Passwords don't match"
+  "passwordsMismatch":"Passwords don't match",
+  "delete":"Delete",
+  "deleteCustomer":"Delete customer",
+  "deleteCustomerMsg":"Are you sure you want to delete this customer?",
+  "deletedSuccessfully":"Deleted successfully"
 }
