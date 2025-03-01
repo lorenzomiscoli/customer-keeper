@@ -1,5 +1,7 @@
 package com.lorenzomiscoli.customer_keeper.common.error_handling;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +19,8 @@ import com.lorenzomiscoli.customer_keeper.common.translation.MessageService;
 public class ExceptionController {
 
 	private final MessageService messageService;
+
+	private static final Logger log = LoggerFactory.getLogger(ExceptionController.class);
 
 	ExceptionController(MessageService messageService) {
 		this.messageService = messageService;
@@ -58,7 +62,7 @@ public class ExceptionController {
 
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<ResponseError> genericError(Exception ex) {
-		ex.printStackTrace();
+		log.error("Error", ex);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 				.body(new ResponseError(messageService.getLocalizedMessage("generic-error")));
 	}

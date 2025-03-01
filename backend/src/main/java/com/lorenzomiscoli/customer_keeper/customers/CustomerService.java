@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,9 @@ class CustomerService {
 
 	private final MessageService messageService;
 
+	private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
+
 	CustomerService(CustomerRepository customerRepo, MessageService messageService) {
-		super();
 		this.customerRepo = customerRepo;
 		this.messageService = messageService;
 	}
@@ -56,7 +59,7 @@ class CustomerService {
 				InputStream is = new BufferedInputStream(new ByteArrayInputStream(logo));
 				mimeType = URLConnection.guessContentTypeFromStream(is);
 			} catch (IOException e) {
-				// TODO add logs
+				log.error("Customer logo Error", e);
 			}
 		}
 		return new CustomerLogoDto(logo, mimeType);
