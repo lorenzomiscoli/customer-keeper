@@ -45,5 +45,6 @@
   "delete":"Elimina",
   "deleteCustomer":"Elimina cliente",
   "deleteCustomerMsg":"Sei sicuro di voler eliminare questo cliente?",
-  "deletedSuccessfully":"Eliminato con successo"
+  "deletedSuccessfully":"Eliminato con successo",
+  "customerDetails":"Dettagli cliente"
 }

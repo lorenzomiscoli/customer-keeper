@@ -1,5 +1,10 @@
 <ng-container *transloco="let t">
   <div class="container">
+    <div class="breadcrumb-container">
+      <span class="active" routerLink="/">Home</span>
+      <span>/</span>
+      <span>{{t('newCustomer')}}</span>
+    </div>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="form">
       <div class="logo-field-container">
         <app-image-upload

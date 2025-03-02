@@ -154,10 +154,22 @@ body {
 .delete-dialog-btn {
   @include mat.button-overrides(
     (
-      text-label-text-color:var(--error-color),
-      text-state-layer-color:var(--error-color)
+      text-label-text-color: var(--error-color),
+      text-state-layer-color: var(--error-color),
     )
   );
+}
+
+.breadcrumb-container {
+  margin-bottom: 30px;
+  display: flex;
+  gap: 10px;
+  color: #868686;
+  font-size: 14px;
+  .active {
+    color: var(--mat-sys-primary);
+    cursor: pointer;
+  }
 }
 
 @include media.respond-above(sm) {

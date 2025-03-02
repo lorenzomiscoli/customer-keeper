@@ -1,5 +1,10 @@
 <ng-container *transloco="let t">
   <div class="container">
+    <div class="breadcrumb-container">
+      <span class="active" routerLink="/">Home</span>
+      <span>/</span>
+      <span>{{t('customerDetails')}}</span>
+    </div>
     <mat-tab-group
       mat-stretch-tabs="false"
       mat-align-tabs="start"

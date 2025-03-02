@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +14,7 @@ import { ImageUploadComponent } from '../../../../components/image-upload/image-
 
 export const CUSTOMER_ADD_DEPS = [
   AsyncPipe,
+  RouterLink,
   ReactiveFormsModule,
   MatButtonModule,
   MatFormFieldModule,
