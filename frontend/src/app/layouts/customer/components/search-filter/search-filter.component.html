@@ -13,7 +13,11 @@
           [(ngModel)]="searchValue"
           #searchInput
         />
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon
+          matSuffix
+          (click)="search((searchInput.value = ''), select.value)"
+          >{{ searchInput.value ? "clear" : "search" }}
+        </mat-icon>
       </mat-form-field>
       <mat-form-field class="small-mat-form-field">
         <mat-select
