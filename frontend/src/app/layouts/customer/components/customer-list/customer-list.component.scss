@@ -10,3 +10,10 @@
   padding-bottom: 10px;
   background-color: #fff;
 }
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 75px;
+}

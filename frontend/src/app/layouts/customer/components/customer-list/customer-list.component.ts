@@ -16,7 +16,7 @@ import { CUSTOMER_LIST_DEPS } from './customer-list.dependencies';
 @Component({
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss',
-  imports: [CUSTOMER_LIST_DEPS]
+  imports: [CUSTOMER_LIST_DEPS],
 })
 export default class CustomerListComponent implements OnInit {
   public customers$!: Observable<Customer[]>;
@@ -26,6 +26,8 @@ export default class CustomerListComponent implements OnInit {
     sort: CustomerSort.NAME,
   });
   public totalPages = 0;
+  public totalElements = 0;
+  public isSearch = false;
 
   constructor(private customerService: CustomerService) {}
 
@@ -40,6 +42,7 @@ export default class CustomerListComponent implements OnInit {
           .pipe(
             map((pageResult) => {
               this.totalPages = pageResult.totalPages;
+              this.totalElements = pageResult.totalElements;
               return pageResult.content;
             })
           );
@@ -48,6 +51,11 @@ export default class CustomerListComponent implements OnInit {
   }
 
   public onSearchChanged(search: CustomerSearch): void {
+    if (search.name) {
+      this.isSearch = true;
+    } else {
+      this.isSearch = false;
+    }
     this.searchFilter$.next(search);
   }
 

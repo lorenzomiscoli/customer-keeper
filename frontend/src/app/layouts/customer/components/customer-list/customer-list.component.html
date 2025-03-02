@@ -1,12 +1,34 @@
-<div class="container">
-  <app-search-filter (searchChanged)="onSearchChanged($event)" />
-  @for(customer of customers$ | async; track customer.id){
-  <app-customer-card [customer]="customer"></app-customer-card>
-  } @if(totalPages > 1){
-  <app-pagination
-    class="sticky-container"
-    [totalPages]="totalPages"
-    (pageChanged)="onPageChanged($event)"
-  ></app-pagination>
-  }
-</div>
+<ng-container *transloco="let t">
+  <div class="container">
+    <app-search-filter (searchChanged)="onSearchChanged($event)" />
+    @for(customer of customers$ | async; track customer.id){
+    <app-customer-card [customer]="customer"></app-customer-card>
+    } @if(totalPages > 1){
+    <app-pagination
+      class="sticky-container"
+      [totalPages]="totalPages"
+      (pageChanged)="onPageChanged($event)"
+    ></app-pagination>
+    } @if(isSearch && totalElements == 0 && totalPages >= 1){
+    <div class="img-container">
+      <img
+        ngSrc="assets/images/search.svg"
+        alt="No results"
+        width="130"
+        height="142"
+      />
+      <p>{{ t("noResults") }}</p>
+    </div>
+    } @else if(totalElements == 0 && totalPages >= 1){
+    <div class="img-container">
+      <img
+        ngSrc="assets/images/add-customer.svg"
+        alt="Add customer"
+        width="180"
+        height="140"
+      />
+      <p>{{ t("homeMsg") }}</p>
+    </div>
+    }
+  </div>
+</ng-container>

@@ -46,5 +46,7 @@
   "deleteCustomer":"Elimina cliente",
   "deleteCustomerMsg":"Sei sicuro di voler eliminare questo cliente?",
   "deletedSuccessfully":"Eliminato con successo",
-  "customerDetails":"Dettagli cliente"
+  "customerDetails":"Dettagli cliente",
+  "homeMsg":"Inizia aggiungendo un cliente",
+  "noResults":"Nessun risultato trovato"
 }
