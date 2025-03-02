@@ -1,50 +1,13 @@
-$margin-top: 30px;
+$margin: 30px;
 
 .container {
-  display: flex;
-  padding-top: $margin-top;
-  padding-bottom: $margin-top;
+  padding-top: $margin;
 }
 
-.sidebar {
-  min-width: 300px;
-  border-right: 1px solid var(--mat-sys-outline-variant);
-  position: fixed;
-  padding-right: 15px;
-  margin-top: -$margin-top;
-  padding-top: $margin-top;
-  height: 100%;
-}
-
-.content {
-  margin-left: 350px;
-  width: 100%;
+:host ::ng-deep mat-tab-header{
+  margin-bottom: $margin;
 }
 
 :host ::ng-deep form{
   margin-top: 5px;
-}
-
-:host ::ng-deep .mat-mdc-tab-labels {
-  display: none;
-}
-
-:host ::ng-deep .mat-mdc-tab-header {
-  display: none;
-}
-
-.nav-item.active {
-  background-color: var(--mat-sys-primary);
-}
-
-:host ::ng-deep .nav-item.active .mdc-list-item__primary-text {
-  color: #fff;
-}
-
-:host ::ng-deep .nav-item .mdc-list-item__primary-text {
-  color: var(--mat-sys-primary);
-}
-
-:host ::ng-deep .mat-mdc-list-base {
-  padding-top: 0;
 }

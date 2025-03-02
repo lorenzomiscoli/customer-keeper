@@ -1,37 +1,22 @@
 <ng-container *transloco="let t">
   <div class="container">
-    <div class="sidebar">
-      <mat-nav-list class="nav-list">
-        <a
-          mat-list-item
-          class="nav-item"
-          (click)="selectedTab = 0"
-          [class]="{ active: selectedTab === 0 }"
-          >{{ t("profileInfo") }}</a
-        >
-        <a
-          mat-list-item
-          class="nav-item"
-          (click)="selectedTab = 1"
-          [class]="{ active: selectedTab === 1 }"
-          >{{ t("securitySettings") }}</a
-        >
-      </mat-nav-list>
+    <div class="breadcrumb-container">
+      <span class="active" routerLink="/">Home</span>
+      <span>/</span>
+      <span>{{t('userSettings')}}</span>
     </div>
-    <div class="content">
-      <mat-tab-group
-        [(selectedIndex)]="selectedTab"
-        mat-stretch-tabs="false"
-        mat-align-tabs="start"
-        dynamicHeight
-      >
-        <mat-tab>
-          <app-profile-info />
-        </mat-tab>
-        <mat-tab>
-          <app-security-settings />
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+    <mat-tab-group
+      [(selectedIndex)]="selectedTab"
+      mat-stretch-tabs="false"
+      mat-align-tabs="start"
+      dynamicHeight
+    >
+      <mat-tab [label]="t('profileInfo')">
+        <app-profile-info />
+      </mat-tab>
+      <mat-tab [label]="t('securitySettings')">
+        <app-security-settings />
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </ng-container>
