@@ -2,9 +2,11 @@
   <app-search-filter (searchChanged)="onSearchChanged($event)" />
   @for(customer of customers$ | async; track customer.id){
   <app-customer-card [customer]="customer"></app-customer-card>
-  }
-  <app-pagination class="sticky-container"
+  } @if(totalPages > 1){
+  <app-pagination
+    class="sticky-container"
     [totalPages]="totalPages"
     (pageChanged)="onPageChanged($event)"
   ></app-pagination>
+  }
 </div>

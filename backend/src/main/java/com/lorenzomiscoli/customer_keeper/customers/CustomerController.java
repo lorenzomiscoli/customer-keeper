@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +39,7 @@ class CustomerController {
 	}
 
 	@GetMapping
-	PageResultDto search(CustomerSearchDto customerSearchDto, Pageable pageable) {
+	PageResultDto search(CustomerSearchDto customerSearchDto, @PageableDefault(size = 10) Pageable pageable) {
 		return customerService.search(customerSearchDto, pageable);
 	}
 
