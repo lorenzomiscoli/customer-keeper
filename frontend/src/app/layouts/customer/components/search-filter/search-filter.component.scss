@@ -3,12 +3,12 @@
 .filter-form {
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  row-gap: 0.625rem;
 }
 
 .filter-container {
   display: flex;
-  column-gap: 10px;
+  column-gap: 0.625rem;
 }
 
 @include media.respond-above(md) {

@@ -1,4 +1,4 @@
-$margin: 30px;
+$margin: 1.875rem;
 
 .container {
   padding-top: $margin;
@@ -9,5 +9,5 @@ $margin: 30px;
 }
 
 :host ::ng-deep form{
-  margin-top: 5px;
+  margin-top: 0.313rem;
 }
