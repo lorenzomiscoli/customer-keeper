@@ -1,7 +1,9 @@
 package com.lorenzomiscoli.customer_keeper.common.configuration;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,8 +22,12 @@ public class SecurityConfig {
 
 	private final BasicAuthenticationProvider authProvider;
 
-	public SecurityConfig(BasicAuthenticationProvider authProvider) {
+	private final List<String> allowedOrigins;
+
+	public SecurityConfig(BasicAuthenticationProvider authProvider,
+			@Value("${allowedOrigins}") List<String> allowedOrigins) {
 		this.authProvider = authProvider;
+		this.allowedOrigins = allowedOrigins;
 	}
 
 	@Bean
@@ -47,7 +53,7 @@ public class SecurityConfig {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		configuration.setAllowedOrigins(allowedOrigins);
 		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 		configuration.setAllowedHeaders(Arrays.asList("*"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

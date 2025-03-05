@@ -1,0 +1,42 @@
+services:
+  customer-keeper-be:
+    container_name: customer-keeper-be
+    volumes:
+      - "customer-keeper-be:/app/logs"
+    build:
+      context: ../backend
+    ports:
+      - 8080:8080
+    depends_on:
+      customer-keeper-db:
+       condition: service_healthy
+    environment:
+      JAR: customer-keeper.jar
+    restart: always
+  customer-keeper-fe:
+    container_name: customer-keeper-fe
+    build:
+      context: ../frontend
+    ports:
+      - 80:80
+    restart: always
+  customer-keeper-db:
+    container_name: customer-keeper-db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PWD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+    - customer-keeper-db:/var/lib/postgresql/data
+    ports:
+    - "6540:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${DB_USER} -d ${DB_NAME}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+volumes:
+ customer-keeper-be:
+ customer-keeper-db:
