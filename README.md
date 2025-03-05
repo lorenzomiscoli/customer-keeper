@@ -1,6 +1,6 @@
 # Customer Keeper
 
-Web app to manage customers.
+Web application to manage customer information.
 
 ## Features
 - Manage customers
@@ -35,3 +35,13 @@ The application is protected by basic authentication so you'll need to provide t
 - password: admin_manager
 
 You can then change password in the user settings section.
+
+## Contributing
+
+Contributions to Customer Keeper are always welcome!
+
+See the [contribution guide](CONTRIBUTING.md) if you want to be a part of this project, it takes less than 2 minutes to get started.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for more details.
