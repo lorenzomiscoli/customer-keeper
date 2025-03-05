@@ -2,6 +2,10 @@
 
 Web application to manage customer information.
 
+## Preview
+
+https://github.com/user-attachments/assets/a3038e7c-fc27-443a-a7a9-04fbb007cbd7
+
 ## Features
 - Manage customers
 - Basic security authentication
