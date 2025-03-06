@@ -4,7 +4,7 @@ Web application to manage customer information.
 
 ## Preview
 
-https://github.com/user-attachments/assets/a3038e7c-fc27-443a-a7a9-04fbb007cbd7
+https://github.com/user-attachments/assets/34983697-6270-4376-b5ba-5deb4f12482b
 
 ## Features
 - Manage customers
