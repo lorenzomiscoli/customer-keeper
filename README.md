@@ -22,12 +22,13 @@ Configuration file example:
 
 ```yaml
 server:
-    port: 8080
-   datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://customer-keeper-db/CustomerKeeper
-      username: sa
-      password: 0Ruxe@h6Tho0asWeC9nO
+  port: 8080
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://customer-keeper-db/CustomerKeeper
+    username: sa
+    password: 0Ruxe@h6Tho0asWeC9nO
 allowedOrigins: http://localhost, http://localhost:4200, http://localhost:80
 ```
 
