@@ -3,7 +3,6 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:resolve
 COPY src ./src
-COPY VERSION.txt src/main/resources
 RUN mvn package
 
 FROM openjdk:21-jdk-slim
